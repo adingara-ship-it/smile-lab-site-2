@@ -22,6 +22,7 @@
         --marron-soft: #a67c52;
         --texte: #8c6239;
         --white: #ffffff;
+        --gold-light: #fbe6c5; /* Nouvelle couleur pour les icônes */
     }
 
     * {
@@ -36,7 +37,6 @@
         scroll-behavior: smooth;
     }
     
-    /* Empêche le défilement du contenu quand le menu est ouvert */
     body.menu-open {
         overflow: hidden; 
     }
@@ -108,7 +108,7 @@
         width: 100%;
     }
     
-    /* Hamburger Toggle (caché par défaut) */
+    /* Hamburger Toggle */
     .menu-toggle {
         display: none; 
         padding: 10px;
@@ -183,9 +183,7 @@
         flex-wrap: wrap;
     }
 
-    /* ************************************** */
-    /* AMÉLIORATION ESTHÉTIQUE : Effets Boutons */
-    /* ************************************** */
+    /* Boutons et effets de survol */
     .btn-primary,
     .btn-ghost {
         padding: 11px 20px;
@@ -202,8 +200,8 @@
     }
     
     .btn-primary:hover {
-        background: var(--marron-soft); /* Assombrissement léger au survol */
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée */
+        background: var(--marron-soft); 
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
     }
 
     .btn-ghost {
@@ -217,8 +215,6 @@
         background: var(--marron-soft);
         color: white;
     }
-    /* ************************************** */
-
 
     /* TITRES */
     .section-title {
@@ -235,7 +231,9 @@
         margin: 0 auto 40px;
     }
 
-    /* POURQUOI NOUS */
+    /* ******************************************************* */
+    /* AMÉLIORATION ESTHÉTIQUE : POURQUOI NOUS (#pourquoi) */
+    /* ******************************************************* */
     #pourquoi {
         padding: 80px 20px;
         background: var(--bg-section);
@@ -252,28 +250,31 @@
         gap: 22px;
     }
     
-    /* ************************************** */
-    /* AMÉLIORATION ESTHÉTIQUE : Effets Cartes */
-    /* ************************************** */
     .why-card {
         background: white;
         padding: 22px;
         border-radius: 14px;
         box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition d'animation */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         cursor: default;
     }
     
     .why-card:hover {
-        transform: translateY(-5px); /* Élève la carte au survol */
+        transform: translateY(-5px); 
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1); 
     }
-    /* ************************************** */
 
-    .why-tag {
-        color: var(--marron-soft);
-        font-weight: 600;
-        margin-bottom: 6px;
+    /* Style pour l'icône/tag */
+    .why-icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--gold-light); 
+        border-radius: 50%;
+        margin-bottom: 12px;
+        font-size: 20px; /* Taille de l'emoji/icône */
     }
 
     .why-title {
@@ -281,8 +282,12 @@
         font-weight: 700;
         margin-bottom: 8px;
     }
+    /* ******************************************************* */
 
-    /* PRESTATIONS */
+
+    /* ******************************************************* */
+    /* AMÉLIORATION ESTHÉTIQUE : NOS PRESTATIONS (#prestations) */
+    /* ******************************************************* */
     #prestations {
         padding: 80px 20px;
     }
@@ -295,40 +300,66 @@
 
     .presta-card {
         background: var(--bg-section);
-        padding: 22px;
+        padding: 26px; /* Augmentation du padding */
         border-radius: 16px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid transparent;
+        transition: border-color 0.3s ease;
+    }
+    
+    .presta-card:hover {
+        border-color: var(--marron-soft); /* Bordure au survol */
+    }
+    
+    /* Badge 'Idéal' */
+    .presta-tag {
+        display: inline-block;
+        background: var(--marron);
+        color: white;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 999px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
     }
 
     .presta-title {
         font-weight: 700;
         color: var(--marron);
+        font-size: 22px; /* Titre plus grand */
+        margin-bottom: 10px;
+    }
+    
+    .presta-desc {
+        font-size: 15px;
+        opacity: 0.8;
     }
 
     .presta-price {
-        margin-top: 10px;
-        font-size: 22px;
-        color: var(--marron-soft);
+        margin-top: 20px;
+        font-size: 30px; /* Prix beaucoup plus grand */
+        color: var(--marron); 
+        font-family: "Playfair Display", serif;
         font-weight: 700;
     }
+    /* ******************************************************* */
 
-    /* AVANT / APRÈS */
+
+    /* AVANT / APRÈS & CONTACT / FOOTER (Styles inchangés) */
     #avant-apres {
         padding: 80px 20px;
         background: var(--bg-section);
     }
-
     .before-after-wrapper {
         max-width: 1100px;
         margin: 0 auto;
     }
-
     .ba-columns {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 26px;
     }
-
     .ba-col-title {
         font-family: "Playfair Display", serif;
         text-align: center;
@@ -336,7 +367,6 @@
         color: var(--marron);
         margin-bottom: 10px;
     }
-
     .ba-col-img {
         width: 100%;
         max-height: 230px;
@@ -345,18 +375,14 @@
         margin-bottom: 16px;
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
     }
-
-    /* CONTACT / FOOTER (Reste inchangé) */
     #contact {
         padding: 80px 20px;
     }
-
     .contact-text {
         max-width: 700px;
         margin: 0 auto 24px;
         text-align: center;
     }
-
     .contact-actions {
         display: flex;
         justify-content: center;
@@ -364,44 +390,36 @@
         margin-bottom: 16px;
         flex-wrap: wrap;
     }
-
     .contact-note {
         text-align: center;
         font-size: 14px;
         opacity: 0.8;
     }
-
     footer {
         background: var(--bg-section);
         padding: 40px 20px;
         text-align: center;
     }
-
     .footer-inner {
         max-width: 1100px;
         margin: 0 auto;
     }
-
     .footer-logo img {
         height: 34px;
         margin-bottom: 6px;
     }
-
     .footer-links {
         display: flex;
         justify-content: center;
         gap: 16px;
         margin: 10px 0;
     }
-
     .footer-madeby {
         font-size: 12px;
         opacity: 0.6;
     }
 
-    /* ************************************** */
-    /* NOUVEAU: SCROLL REVEAL ANIMATION */
-    /* ************************************** */
+    /* SCROLL REVEAL ANIMATION */
     .reveal {
         opacity: 0;
         transform: translateY(25px);
@@ -409,15 +427,12 @@
                     transform 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67);
     }
 
-    /* Classe déclenchée par JS pour révéler l'élément */
     .reveal.active {
         opacity: 1;
         transform: translateY(0);
     }
 
-    /* ************************************** */
     /* RESPONSIVE OPTIMISÉ */
-    /* ************************************** */
 
     /* Tablette et Mobile (<= 900px) */
     @media (max-width: 900px) {
@@ -569,19 +584,19 @@
         </p>
         <div class="why-grid">
             <div class="why-card reveal" style="transition-delay: 0.1s;">
-                <div class="why-tag">1</div>
+                <div class="why-icon-wrap">⭐</div>
                 <div class="why-title">Produits vegan & cruelty-free</div>
                 Produits non testés sur les animaux, sans ingrédients d’origine
                 animale, adaptés aux peaux sensibles.
             </div>
             <div class="why-card reveal" style="transition-delay: 0.2s;">
-                <div class="why-tag">2</div>
+                <div class="why-icon-wrap">💡</div>
                 <div class="why-title">Méthode américaine moderne</div>
                 Protocole inspiré des techniques américaines, efficace, rapide
                 et sûr.
             </div>
             <div class="why-card reveal" style="transition-delay: 0.3s;">
-                <div class="why-tag">3</div>
+                <div class="why-icon-wrap">😌</div>
                 <div class="why-title">Non agressif & confortable</div>
                 Formule douce, respectueuse de l’émail, idéale pour un
                 résultat serein et lumineux.
@@ -607,7 +622,7 @@
                 <div class="presta-price">70€</div>
             </div>
             <div class="presta-card reveal" style="transition-delay: 0.2s;">
-                <div class="presta-tag">Résultat plus intense</div>
+                <div class="presta-tag" style="background: #a67c52;">Intensif</div>
                 <div class="presta-title">Séance Premium</div>
                 <div class="presta-desc">
                     Éclaircissement renforcé, idéal avant un évènement important.
@@ -706,7 +721,7 @@
         showSlide(index);
     }, 6000);
     
-    // Logique du menu hamburger
+    // Logique du menu hamburger (avec croix de fermeture)
     const menuToggle = document.querySelector(".menu-toggle");
     const mainNav = document.querySelector(".main-nav");
     const body = document.body;
@@ -722,24 +737,27 @@
     });
 
     // LOGIQUE DU SCROLL REVEAL (Animation au défilement)
-    
     const revealElements = document.querySelectorAll('.reveal');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Ajoute la classe 'active' pour déclencher l'animation CSS
                 entry.target.classList.add('active');
-                // Arrête d'observer l'élément pour éviter de refaire l'animation
                 observer.unobserve(entry.target); 
             }
         });
     }, {
-        // Déclenche l'animation lorsque 10% de l'élément est visible
         threshold: 0.1 
     });
 
     revealElements.forEach(element => {
+        // Applique un délai séquentiel aux éléments de la grille
+        if (element.style.transitionDelay) {
+            // Pas de changement si un délai est déjà défini (pour les cartes)
+        } else {
+            // Applique un délai simple aux titres
+            element.style.transitionDelay = '0s'; 
+        }
         observer.observe(element);
     });
 </script>
