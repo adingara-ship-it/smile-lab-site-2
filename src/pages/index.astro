@@ -89,24 +89,19 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
     font-size: 15px;
   }
 
-  nav a {
-    position: relative;
-    padding-bottom: 2px;
-  }
+  /* --- mobile header --- */
+  @media (max-width: 600px) {
+    nav {
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      justify-content: center;
+    }
 
-  nav a::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    left: 0;
-    bottom: -2px;
-    height: 2px;
-    background: var(--marron);
-    transition: 0.2s;
-  }
-
-  nav a:hover::after {
-    width: 100%;
+    .topbar {
+      flex-direction: column;
+      gap: 8px;
+    }
   }
 
   /* HERO */
@@ -167,6 +162,7 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
   .hero-subtitle {
     font-size: 15px;
     margin-bottom: 20px;
+    max-width: 420px;
   }
 
   .hero-btns {
@@ -175,24 +171,39 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
     flex-wrap: wrap;
   }
 
-  .btn-primary,
-  .btn-ghost {
-    padding: 11px 20px;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
-  }
+  /* --- HERO MOBILE --- */
+  @media (max-width: 600px) {
+    .hero-slider {
+      height: 250px;
+      border-radius: 14px;
+    }
 
-  .btn-primary {
-    background: var(--marron);
-    color: white;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-  }
+    .hero-overlay {
+      padding: 20px;
+      align-items: flex-end;
+      background: linear-gradient(
+        to top,
+        rgba(247, 238, 220, 0.95),
+        rgba(247, 238, 220, 0.4)
+      );
+    }
 
-  .btn-ghost {
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: var(--marron-soft);
+    .hero-title {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .hero-subtitle {
+      font-size: 13px;
+      margin-bottom: 14px;
+      max-width: 300px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      font-size: 13px;
+      padding: 9px 16px;
+    }
   }
 
   /* TITRES */
@@ -227,23 +238,11 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
     gap: 22px;
   }
 
-  .why-card {
-    background: white;
-    padding: 22px;
-    border-radius: 14px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
-  }
-
-  .why-tag {
-    color: var(--marron-soft);
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-
-  .why-title {
-    color: var(--marron);
-    font-weight: 700;
-    margin-bottom: 8px;
+  /* MOBILE GRID */
+  @media (max-width: 900px) {
+    .why-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* PRESTATIONS */
@@ -257,23 +256,10 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
     gap: 22px;
   }
 
-  .presta-card {
-    background: var(--bg-section);
-    padding: 22px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  }
-
-  .presta-title {
-    font-weight: 700;
-    color: var(--marron);
-  }
-
-  .presta-price {
-    margin-top: 10px;
-    font-size: 22px;
-    color: var(--marron-soft);
-    font-weight: 700;
+  @media (max-width: 900px) {
+    .prestations-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* AVANT / APRÈS */
@@ -282,23 +268,16 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
     background: var(--bg-section);
   }
 
-  .before-after-wrapper {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
   .ba-columns {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 26px;
   }
 
-  .ba-col-title {
-    font-family: "Playfair Display", serif;
-    text-align: center;
-    font-size: 18px;
-    color: var(--marron);
-    margin-bottom: 10px;
+  @media (max-width: 900px) {
+    .ba-columns {
+      grid-template-columns: 1fr;
+    }
   }
 
   .ba-col-img {
@@ -310,15 +289,15 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
   }
 
+  @media (max-width: 480px) {
+    .ba-col-img {
+      max-height: 170px;
+    }
+  }
+
   /* CONTACT */
   #contact {
     padding: 80px 20px;
-  }
-
-  .contact-text {
-    max-width: 700px;
-    margin: 0 auto 24px;
-    text-align: center;
   }
 
   .contact-actions {
@@ -329,72 +308,11 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
     flex-wrap: wrap;
   }
 
-  .contact-note {
-    text-align: center;
-    font-size: 14px;
-    opacity: 0.8;
-  }
-
   /* FOOTER */
   footer {
     background: var(--bg-section);
     padding: 40px 20px;
     text-align: center;
-  }
-
-  .footer-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .footer-logo img {
-    height: 34px;
-    margin-bottom: 6px;
-  }
-
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin: 10px 0;
-  }
-
-  .footer-madeby {
-    font-size: 12px;
-    opacity: 0.6;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .why-grid,
-    .prestations-grid,
-    .ba-columns {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .hero-slider {
-      height: 240px;
-    }
-
-    nav {
-      font-size: 12px;
-      flex-wrap: wrap;
-    }
-
-    .topbar {
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .hero-title {
-      font-size: 22px;
-    }
-
-    .ba-col-img {
-      max-height: 180px;
-    }
   }
 </style>
 
@@ -460,21 +378,19 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
         <div class="why-tag">1</div>
         <div class="why-title">Produits vegan & cruelty-free</div>
         Produits non testés sur les animaux, sans ingrédients d’origine
-        animale, adaptés aux peaux sensibles.
+        animale.
       </div>
 
       <div class="why-card">
         <div class="why-tag">2</div>
         <div class="why-title">Méthode américaine moderne</div>
-        Protocole inspiré des techniques américaines, efficace, rapide et
-        sûr.
+        Protocole inspiré des techniques américaines, rapide et sûr.
       </div>
 
       <div class="why-card">
         <div class="why-tag">3</div>
         <div class="why-title">Non agressif & confortable</div>
-        Formule douce, respectueuse de l’émail, idéale pour un résultat
-        serein et lumineux.
+        Formule douce, respectueuse de l’émail.
       </div>
     </div>
   </div>
@@ -485,8 +401,7 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
   <div class="section-inner">
     <h2 class="section-title">Nos prestations</h2>
     <p class="section-sub">
-      Deux formules simples : boost de blancheur ou éclaircissement
-      renforcé.
+      Deux formules simples : boost de blancheur ou éclaircissement renforcé.
     </p>
 
     <div class="prestations-grid">
@@ -494,16 +409,16 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
         <div class="presta-tag">Idéal première séance</div>
         <div class="presta-title">Séance Standard</div>
         <div class="presta-desc">
-          Une séance complète pour gagner plusieurs teintes en douceur.
+          Une séance complète pour gagner plusieurs teintes.
         </div>
         <div class="presta-price">70€</div>
       </div>
 
       <div class="presta-card">
-        <div class="presta-tag">Résultat plus intense</div>
+        <div class="presta-tag">Résultat intense</div>
         <div class="presta-title">Séance Premium</div>
         <div class="presta-desc">
-          Éclaircissement renforcé, idéal avant un évènement important.
+          Éclaircissement renforcé.
         </div>
         <div class="presta-price">90€</div>
       </div>
@@ -515,23 +430,21 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
 <section id="avant-apres">
   <div class="section-inner before-after-wrapper">
     <h2 class="section-title">Avant / Après</h2>
-    <p class="section-sub">
-      Comparaison directe des résultats obtenus après une séance.
-    </p>
+    <p class="section-sub">Comparaison des résultats après une séance.</p>
 
     <div class="ba-columns">
       <div>
         <h3 class="ba-col-title">Avant</h3>
-        <img src="/before1a.jpg" class="ba-col-img" alt="Avant 1" />
-        <img src="/before2b.jpg" class="ba-col-img" alt="Avant 2" />
-        <img src="/before.jpg" class="ba-col-img" alt="Avant 3" />
+        <img src="/before1a.jpg" class="ba-col-img" />
+        <img src="/before2b.jpg" class="ba-col-img" />
+        <img src="/before.jpg" class="ba-col-img" />
       </div>
 
       <div>
         <h3 class="ba-col-title">Après</h3>
-        <img src="/after1a.jpg" class="ba-col-img" alt="Après 1" />
-        <img src="/after2b.jpg" class="ba-col-img" alt="Après 2" />
-        <img src="/after.jpg" class="ba-col-img" alt="Après 3" />
+        <img src="/after1a.jpg" class="ba-col-img" />
+        <img src="/after2b.jpg" class="ba-col-img" />
+        <img src="/after.jpg" class="ba-col-img" />
       </div>
     </div>
   </div>
@@ -541,31 +454,19 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
 <section id="contact">
   <div class="section-inner">
     <h2 class="section-title">Prendre rendez-vous</h2>
-    <p class="contact-text">
-      Choisis le mode de contact le plus simple pour toi.
-    </p>
 
     <div class="contact-actions">
-      <a
-        class="btn-primary"
-        target="_blank"
-        href="https://calendly.com/smilelabbelgium/seance-de-blanchiment-dentaire-a-domicile"
-      >
+      <a class="btn-primary" target="_blank" href="https://calendly.com/smilelabbelgium/seance-de-blanchiment-dentaire-a-domicile">
         Réserver via Calendly
       </a>
 
-      <a
-        class="btn-ghost"
-        target="_blank"
-        href="https://www.instagram.com/smile_lab_belgium/"
-      >
+      <a class="btn-ghost" target="_blank" href="https://www.instagram.com/smile_lab_belgium/">
         Nous écrire sur Instagram
       </a>
     </div>
 
     <p class="contact-note">
-      Déplacement à domicile sur Mons et environs. Numéro WhatsApp communiqué
-      après prise de contact.
+      Déplacement à domicile sur Mons et environs.
     </p>
   </div>
 </section>
@@ -577,23 +478,10 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
       <img src={logo} alt="Smile Lab" />
     </div>
 
-    <p>
-      Blanchiment dentaire américain — Produits vegan & cruelty-free —
-      Déplacement à domicile (Mons)
-    </p>
-
-    <div class="footer-links">
-      <a
-        target="_blank"
-        href="https://www.instagram.com/smile_lab_belgium/"
-      >
-        Instagram
-      </a>
-      <span style="opacity: 0.4">WhatsApp (bientôt)</span>
-    </div>
+    <p>Blanchiment dentaire américain — Déplacement à domicile (Mons)</p>
 
     <p>© 2025 Smile Lab — Tous droits réservés</p>
-    <p class="footer-madeby">Fait avec soin par A&A Web Designer</p>
+    <p class="footer-madeby">Fait par A&A Web Designer</p>
   </div>
 </footer>
 
@@ -612,6 +500,7 @@ const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
     showSlide(index);
   }, 6000);
 </script>
+
 
 
 
