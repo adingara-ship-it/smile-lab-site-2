@@ -22,7 +22,7 @@
         --marron-soft: #a67c52;
         --texte: #8c6239;
         --white: #ffffff;
-        --gold-light: #fbe6c5; /* Nouvelle couleur pour les icônes */
+        --gold-light: #fbe6c5;
     }
 
     * {
@@ -231,9 +231,7 @@
         margin: 0 auto 40px;
     }
 
-    /* ******************************************************* */
-    /* AMÉLIORATION ESTHÉTIQUE : POURQUOI NOUS (#pourquoi) */
-    /* ******************************************************* */
+    /* POURQUOI NOUS (#pourquoi) */
     #pourquoi {
         padding: 80px 20px;
         background: var(--bg-section);
@@ -264,7 +262,6 @@
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1); 
     }
 
-    /* Style pour l'icône/tag */
     .why-icon-wrap {
         display: flex;
         align-items: center;
@@ -274,7 +271,7 @@
         background: var(--gold-light); 
         border-radius: 50%;
         margin-bottom: 12px;
-        font-size: 20px; /* Taille de l'emoji/icône */
+        font-size: 20px;
     }
 
     .why-title {
@@ -282,12 +279,8 @@
         font-weight: 700;
         margin-bottom: 8px;
     }
-    /* ******************************************************* */
 
-
-    /* ******************************************************* */
-    /* AMÉLIORATION ESTHÉTIQUE : NOS PRESTATIONS (#prestations) */
-    /* ******************************************************* */
+    /* NOS PRESTATIONS (#prestations) */
     #prestations {
         padding: 80px 20px;
     }
@@ -300,7 +293,7 @@
 
     .presta-card {
         background: var(--bg-section);
-        padding: 26px; /* Augmentation du padding */
+        padding: 26px;
         border-radius: 16px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
         border: 1px solid transparent;
@@ -308,10 +301,9 @@
     }
     
     .presta-card:hover {
-        border-color: var(--marron-soft); /* Bordure au survol */
+        border-color: var(--marron-soft);
     }
     
-    /* Badge 'Idéal' */
     .presta-tag {
         display: inline-block;
         background: var(--marron);
@@ -327,7 +319,7 @@
     .presta-title {
         font-weight: 700;
         color: var(--marron);
-        font-size: 22px; /* Titre plus grand */
+        font-size: 22px;
         margin-bottom: 10px;
     }
     
@@ -338,12 +330,11 @@
 
     .presta-price {
         margin-top: 20px;
-        font-size: 30px; /* Prix beaucoup plus grand */
+        font-size: 30px;
         color: var(--marron); 
         font-family: "Playfair Display", serif;
         font-weight: 700;
     }
-    /* ******************************************************* */
 
 
     /* AVANT / APRÈS & CONTACT / FOOTER (Styles inchangés) */
@@ -475,16 +466,17 @@
             overflow-y: auto;
         }
         
-        /* Animation du hamburger en croix (X) */
+        /* === LOGIQUE DE LA CROIX DE FERMETURE === */
         body.menu-open .menu-toggle .bar:nth-child(2) {
-            opacity: 0;
+            opacity: 0; 
         }
         body.menu-open .menu-toggle .bar:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+            transform: translateY(8px) rotate(45deg); 
         }
         body.menu-open .menu-toggle .bar:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+            transform: translateY(-8px) rotate(-45deg); 
         }
+        /* ======================================= */
     }
 
     /* Styles pour les petits téléphones (<= 550px) */
@@ -751,13 +743,7 @@
     });
 
     revealElements.forEach(element => {
-        // Applique un délai séquentiel aux éléments de la grille
-        if (element.style.transitionDelay) {
-            // Pas de changement si un délai est déjà défini (pour les cartes)
-        } else {
-            // Applique un délai simple aux titres
-            element.style.transitionDelay = '0s'; 
-        }
+        // Le délai est géré directement dans le HTML des cartes pour la séquence
         observer.observe(element);
     });
 </script>
