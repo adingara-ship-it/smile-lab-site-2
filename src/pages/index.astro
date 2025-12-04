@@ -1,0 +1,620 @@
+---
+const logo = "/logo.png";
+const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smile Lab – Blanchiment Dentaire</title>
+  <meta
+    name="description"
+    content="Blanchiment dentaire américain à Mons. Produits vegan & cruelty-free, formule douce non agressive, résultats visibles dès la première séance, à domicile."
+  />
+
+  <!-- Polices -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<style>
+  :root {
+    --bg-page: #f7eedc;
+    --bg-section: #fbf5eb;
+    --marron: #b58b57;
+    --marron-soft: #a67c52;
+    --texte: #8c6239;
+    --white: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background: var(--bg-page);
+    color: var(--texte);
+    scroll-behavior: smooth;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg-section);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  .topbar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-wrap img {
+    height: 52px;
+  }
+
+  .logo-text {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    color: var(--marron);
+    line-height: 1.1;
+  }
+
+  nav {
+    display: flex;
+    gap: 20px;
+    font-size: 15px;
+  }
+
+  nav a {
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    left: 0;
+    bottom: -2px;
+    height: 2px;
+    background: var(--marron);
+    transition: 0.2s;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  /* HERO */
+  #hero {
+    padding: 50px 20px;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-slider {
+    height: 360px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+
+  .hero-slide.active {
+    opacity: 1;
+  }
+
+  .hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 40px;
+    background: linear-gradient(
+      to right,
+      rgba(247, 238, 220, 0.9),
+      rgba(247, 238, 220, 0.2)
+    );
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-title {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    color: var(--marron);
+    margin-bottom: 10px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    padding: 11px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .btn-primary {
+    background: var(--marron);
+    color: white;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-ghost {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--marron-soft);
+  }
+
+  /* TITRES */
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+    color: var(--marron);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .section-sub {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px;
+  }
+
+  /* POURQUOI NOUS */
+  #pourquoi {
+    padding: 80px 20px;
+    background: var(--bg-section);
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .why-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+  }
+
+  .why-tag {
+    color: var(--marron-soft);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .why-title {
+    color: var(--marron);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  /* PRESTATIONS */
+  #prestations {
+    padding: 80px 20px;
+  }
+
+  .prestations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .presta-card {
+    background: var(--bg-section);
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .presta-title {
+    font-weight: 700;
+    color: var(--marron);
+  }
+
+  .presta-price {
+    margin-top: 10px;
+    font-size: 22px;
+    color: var(--marron-soft);
+    font-weight: 700;
+  }
+
+  /* AVANT / APRÈS */
+  #avant-apres {
+    padding: 80px 20px;
+    background: var(--bg-section);
+  }
+
+  .before-after-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .ba-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+
+  .ba-col-title {
+    font-family: "Playfair Display", serif;
+    text-align: center;
+    font-size: 18px;
+    color: var(--marron);
+    margin-bottom: 10px;
+  }
+
+  .ba-col-img {
+    width: 100%;
+    max-height: 230px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  /* CONTACT */
+  #contact {
+    padding: 80px 20px;
+  }
+
+  .contact-text {
+    max-width: 700px;
+    margin: 0 auto 24px;
+    text-align: center;
+  }
+
+  .contact-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .contact-note {
+    text-align: center;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg-section);
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-logo img {
+    height: 34px;
+    margin-bottom: 6px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 10px 0;
+  }
+
+  .footer-madeby {
+    font-size: 12px;
+    opacity: 0.6;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .why-grid,
+    .prestations-grid,
+    .ba-columns {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-slider {
+      height: 240px;
+    }
+
+    nav {
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    .topbar {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-title {
+      font-size: 22px;
+    }
+
+    .ba-col-img {
+      max-height: 180px;
+    }
+  }
+</style>
+
+<header>
+  <div class="topbar">
+    <a href="#hero" class="logo-wrap">
+      <img src={logo} alt="Smile Lab" />
+      <div class="logo-text">
+        Smile<br />
+        Lab
+      </div>
+    </a>
+
+    <nav>
+      <a href="#hero">Accueil</a>
+      <a href="#pourquoi">Pourquoi nous ?</a>
+      <a href="#prestations">Prestations</a>
+      <a href="#avant-apres">Avant / Après</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-slider">
+      {heroSlides.map((img, index) => (
+        <div class={`hero-slide ${index === 0 ? "active" : ""}`}>
+          <img src={img} alt="Sourire" />
+        </div>
+      ))}
+
+      <div class="hero-overlay">
+        <div>
+          <h1 class="hero-title">Blanchiment dentaire américain</h1>
+          <p class="hero-subtitle">
+            Produits vegan & cruelty-free, formule douce non agressive,
+            résultats visibles dès la première séance.
+          </p>
+
+          <div class="hero-btns">
+            <a href="#contact" class="btn-primary">Prendre rendez-vous</a>
+            <a href="#avant-apres" class="btn-ghost">Voir les résultats</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POURQUOI NOUS -->
+<section id="pourquoi">
+  <div class="section-inner">
+    <h2 class="section-title">Pourquoi choisir Smile Lab ?</h2>
+    <p class="section-sub">
+      Un service de blanchiment dentaire pensé pour le confort, la sécurité
+      et un résultat lumineux dès la première séance.
+    </p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-tag">1</div>
+        <div class="why-title">Produits vegan & cruelty-free</div>
+        Produits non testés sur les animaux, sans ingrédients d’origine
+        animale, adaptés aux peaux sensibles.
+      </div>
+
+      <div class="why-card">
+        <div class="why-tag">2</div>
+        <div class="why-title">Méthode américaine moderne</div>
+        Protocole inspiré des techniques américaines, efficace, rapide et
+        sûr.
+      </div>
+
+      <div class="why-card">
+        <div class="why-tag">3</div>
+        <div class="why-title">Non agressif & confortable</div>
+        Formule douce, respectueuse de l’émail, idéale pour un résultat
+        serein et lumineux.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESTATIONS -->
+<section id="prestations">
+  <div class="section-inner">
+    <h2 class="section-title">Nos prestations</h2>
+    <p class="section-sub">
+      Deux formules simples : boost de blancheur ou éclaircissement
+      renforcé.
+    </p>
+
+    <div class="prestations-grid">
+      <div class="presta-card">
+        <div class="presta-tag">Idéal première séance</div>
+        <div class="presta-title">Séance Standard</div>
+        <div class="presta-desc">
+          Une séance complète pour gagner plusieurs teintes en douceur.
+        </div>
+        <div class="presta-price">70€</div>
+      </div>
+
+      <div class="presta-card">
+        <div class="presta-tag">Résultat plus intense</div>
+        <div class="presta-title">Séance Premium</div>
+        <div class="presta-desc">
+          Éclaircissement renforcé, idéal avant un évènement important.
+        </div>
+        <div class="presta-price">90€</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVANT / APRÈS -->
+<section id="avant-apres">
+  <div class="section-inner before-after-wrapper">
+    <h2 class="section-title">Avant / Après</h2>
+    <p class="section-sub">
+      Comparaison directe des résultats obtenus après une séance.
+    </p>
+
+    <div class="ba-columns">
+      <div>
+        <h3 class="ba-col-title">Avant</h3>
+        <img src="/before1a.jpg" class="ba-col-img" alt="Avant 1" />
+        <img src="/before2b.jpg" class="ba-col-img" alt="Avant 2" />
+        <img src="/before.jpg" class="ba-col-img" alt="Avant 3" />
+      </div>
+
+      <div>
+        <h3 class="ba-col-title">Après</h3>
+        <img src="/after1a.jpg" class="ba-col-img" alt="Après 1" />
+        <img src="/after2b.jpg" class="ba-col-img" alt="Après 2" />
+        <img src="/after.jpg" class="ba-col-img" alt="Après 3" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">Prendre rendez-vous</h2>
+    <p class="contact-text">
+      Choisis le mode de contact le plus simple pour toi.
+    </p>
+
+    <div class="contact-actions">
+      <a
+        class="btn-primary"
+        target="_blank"
+        href="https://calendly.com/smilelabbelgium/seance-de-blanchiment-dentaire-a-domicile"
+      >
+        Réserver via Calendly
+      </a>
+
+      <a
+        class="btn-ghost"
+        target="_blank"
+        href="https://www.instagram.com/smile_lab_belgium/"
+      >
+        Nous écrire sur Instagram
+      </a>
+    </div>
+
+    <p class="contact-note">
+      Déplacement à domicile sur Mons et environs. Numéro WhatsApp communiqué
+      après prise de contact.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src={logo} alt="Smile Lab" />
+    </div>
+
+    <p>
+      Blanchiment dentaire américain — Produits vegan & cruelty-free —
+      Déplacement à domicile (Mons)
+    </p>
+
+    <div class="footer-links">
+      <a
+        target="_blank"
+        href="https://www.instagram.com/smile_lab_belgium/"
+      >
+        Instagram
+      </a>
+      <span style="opacity: 0.4">WhatsApp (bientôt)</span>
+    </div>
+
+    <p>© 2025 Smile Lab — Tous droits réservés</p>
+    <p class="footer-madeby">Fait avec soin par A&A Web Designer</p>
+  </div>
+</footer>
+
+<script is:inline>
+  const slides = document.querySelectorAll(".hero-slide");
+  let index = 0;
+
+  function showSlide(i) {
+    slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+  }
+
+  showSlide(0);
+
+  setInterval(() => {
+    index = (index + 1) % slides.length;
+    showSlide(index);
+  }, 6000);
+</script>
+
+
+
+
+
+
