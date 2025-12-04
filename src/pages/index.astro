@@ -35,6 +35,11 @@
         color: var(--texte);
         scroll-behavior: smooth;
     }
+    
+    /* Empêche le défilement du contenu quand le menu est ouvert */
+    body.menu-open {
+        overflow: hidden; 
+    }
 
     a {
         color: inherit;
@@ -45,7 +50,7 @@
     header {
         position: sticky;
         top: 0;
-        z-index: 50;
+        z-index: 100; /* Augmenté pour être au-dessus du menu overlay */
         background: var(--bg-section);
         border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     }
@@ -75,8 +80,9 @@
         color: var(--marron);
         line-height: 1.1;
     }
-
-    nav {
+    
+    /* Styles de navigation par défaut (desktop) */
+    nav.main-nav {
         display: flex;
         gap: 20px;
         font-size: 15px;
@@ -101,43 +107,56 @@
     nav a:hover::after {
         width: 100%;
     }
+    
+    /* NOUVEAU: Hamburger Toggle (caché par défaut) */
+    .menu-toggle {
+        display: none; /* Caché sur desktop */
+        padding: 10px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        /* Aligne l'icône sur la droite du logo */
+        margin-left: auto; 
+    }
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px 0;
+        background-color: var(--marron);
+        transition: 0.3s;
+    }
 
-    /* HERO */
+
+    /* HERO (Reste inchangé pour la lisibilité) */
     #hero {
         padding: 50px 20px;
     }
-
     .hero-inner {
         max-width: 1100px;
         margin: 0 auto;
     }
-
     .hero-slider {
-        /* Augmentation de la hauteur pour un meilleur impact sur grand écran */
-        height: 360px; 
+        height: 360px;
         border-radius: 20px;
         overflow: hidden;
         position: relative;
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
     }
-
     .hero-slide {
         position: absolute;
         inset: 0;
         opacity: 0;
         transition: opacity 0.7s ease;
     }
-
     .hero-slide.active {
         opacity: 1;
     }
-
     .hero-slide img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
-
     .hero-overlay {
         position: absolute;
         inset: 0;
@@ -150,25 +169,21 @@
         display: flex;
         align-items: center;
     }
-
     .hero-title {
         font-family: "Playfair Display", serif;
         font-size: 32px;
         color: var(--marron);
         margin-bottom: 10px;
     }
-
     .hero-subtitle {
         font-size: 15px;
         margin-bottom: 20px;
     }
-
     .hero-btns {
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
     }
-
     .btn-primary,
     .btn-ghost {
         padding: 11px 20px;
@@ -176,20 +191,17 @@
         font-size: 14px;
         font-weight: 600;
     }
-
     .btn-primary {
         background: var(--marron);
         color: white;
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
     }
-
     .btn-ghost {
         background: white;
         border: 1px solid rgba(0, 0, 0, 0.1);
         color: var(--marron-soft);
     }
-
-    /* TITRES */
+    /* TITRES (Reste inchangé) */
     .section-title {
         font-family: "Playfair Display", serif;
         font-size: 30px;
@@ -197,96 +209,80 @@
         text-align: center;
         margin-bottom: 20px;
     }
-
     .section-sub {
         text-align: center;
         max-width: 700px;
         margin: 0 auto 40px;
     }
-
-    /* POURQUOI NOUS */
+    /* POURQUOI NOUS (Reste inchangé) */
     #pourquoi {
         padding: 80px 20px;
         background: var(--bg-section);
     }
-
     .section-inner {
         max-width: 1100px;
         margin: 0 auto;
     }
-
     .why-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 22px;
     }
-
     .why-card {
         background: white;
         padding: 22px;
         border-radius: 14px;
         box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
     }
-
     .why-tag {
         color: var(--marron-soft);
         font-weight: 600;
         margin-bottom: 6px;
     }
-
     .why-title {
         color: var(--marron);
         font-weight: 700;
         margin-bottom: 8px;
     }
-
-    /* PRESTATIONS */
+    /* PRESTATIONS (Reste inchangé) */
     #prestations {
         padding: 80px 20px;
     }
-
     .prestations-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 22px;
     }
-
     .presta-card {
         background: var(--bg-section);
         padding: 22px;
         border-radius: 16px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     }
-
     .presta-title {
         font-weight: 700;
         color: var(--marron);
     }
-
     .presta-price {
         margin-top: 10px;
         font-size: 22px;
         color: var(--marron-soft);
         font-weight: 700;
     }
-
-    /* AVANT / APRÈS */
+    /* AVANT / APRÈS (Reste inchangé) */
     #avant-apres {
         padding: 80px 20px;
         background: var(--bg-section);
     }
-
     .before-after-wrapper {
         max-width: 1100px;
         margin: 0 auto;
     }
-
     .ba-columns {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 26px;
     }
-
     .ba-col-title {
         font-family: "Playfair Display", serif;
         text-align: center;
@@ -294,7 +290,6 @@
         color: var(--marron);
         margin-bottom: 10px;
     }
-
     .ba-col-img {
         width: 100%;
         max-height: 230px;
@@ -303,18 +298,15 @@
         margin-bottom: 16px;
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
     }
-
-    /* CONTACT */
+    /* CONTACT (Reste inchangé) */
     #contact {
         padding: 80px 20px;
     }
-
     .contact-text {
         max-width: 700px;
         margin: 0 auto 24px;
         text-align: center;
     }
-
     .contact-actions {
         display: flex;
         justify-content: center;
@@ -322,87 +314,98 @@
         margin-bottom: 16px;
         flex-wrap: wrap;
     }
-
     .contact-note {
         text-align: center;
         font-size: 14px;
         opacity: 0.8;
     }
-
-    /* FOOTER */
+    /* FOOTER (Reste inchangé) */
     footer {
         background: var(--bg-section);
         padding: 40px 20px;
         text-align: center;
     }
-
     .footer-inner {
         max-width: 1100px;
         margin: 0 auto;
     }
-
     .footer-logo img {
         height: 34px;
         margin-bottom: 6px;
     }
-
     .footer-links {
         display: flex;
         justify-content: center;
         gap: 16px;
         margin: 10px 0;
     }
-
     .footer-madeby {
         font-size: 12px;
         opacity: 0.6;
     }
 
-    /* RESPONSIVE OPTIMISÉ */
+    /* RESPONSIVE OPTIMISÉ POUR LE MENU HAMBURGER */
 
-    /* Pour les tablettes et petits ordinateurs portables */
+    /* Tablette et Mobile (<= 900px) */
     @media (max-width: 900px) {
-        /* Les grilles passent en colonne unique */
+        /* Affiche le bouton hamburger et cache la nav classique */
+        nav.main-nav {
+            display: none;
+        }
+        .menu-toggle {
+            display: block;
+        }
+        
+        /* Layout des éléments principaux */
         .why-grid,
         .prestations-grid,
         .ba-columns {
             grid-template-columns: 1fr;
         }
 
-        /* Réduction du padding général pour utiliser l'espace */
         #pourquoi,
         #prestations,
         #avant-apres,
         #contact {
             padding: 60px 20px;
         }
+        
+        /* Style du menu OUVERT (quand body a la classe .menu-open) */
+        body.menu-open nav.main-nav {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-section);
+            z-index: 90; /* Doit être au-dessus du contenu, mais sous le bouton toggle */
+            padding: 100px 20px 20px;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 30px;
+            font-size: 20px; /* Taille de police plus grande pour la navigation mobile */
+            overflow-y: auto;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Animation du hamburger en croix (X) */
+        body.menu-open .menu-toggle .bar:nth-child(2) {
+            opacity: 0;
+        }
+        body.menu-open .menu-toggle .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        body.menu-open .menu-toggle .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
     }
 
-    /* Pour les téléphones mobiles (moins de 550px) */
+    /* Styles pour les petits téléphones (<= 550px) */
     @media (max-width: 550px) {
-        /* HEADER (Barre de navigation) */
-        .topbar {
-            /* On enlève la justification entre les éléments */
-            justify-content: center;
-            /* La navigation s'empile verticalement */
-            flex-direction: column;
-            gap: 12px;
-            padding: 10px 20px; /* Plus compact */
-        }
-
-        /* Navigation Links */
-        nav {
-            /* Permet aux liens de s'empiler si trop d'éléments */
-            flex-wrap: wrap; 
-            justify-content: center;
-            font-size: 14px;
-            gap: 10px 15px; /* Ajustement du gap */
-        }
-
-        /* Section HERO */
         .hero-slider {
-            /* Hauteur plus grande pour mieux voir l'image sur mobile */
-            height: 300px; 
+            height: 300px;
         }
 
         .hero-overlay {
@@ -410,36 +413,25 @@
         }
 
         .hero-title {
-            /* Réduction de la taille du titre principal sur mobile */
-            font-size: 28px; 
+            font-size: 28px;
         }
-
-        /* Titres de Section */
+        
         .section-title {
-            font-size: 24px; /* Rendre les titres de section plus petits */
+            font-size: 24px;
             margin-bottom: 15px;
         }
-
-        .section-sub {
-            margin-bottom: 30px;
-        }
-
-        /* Boutons */
-        .hero-btns {
-            /* Les boutons s'empilent si l'écran est trop étroit */
+        
+        .hero-btns, .contact-actions {
             flex-direction: column; 
         }
         
-        /* Les boutons prennent toute la largeur du container */
         .btn-primary, .btn-ghost {
             width: 100%; 
             text-align: center;
         }
-        
-        /* AVANT / APRÈS */
+
         .ba-col-img {
-            /* Une hauteur maximale légèrement plus grande pour l'impact */
-            max-height: 200px; 
+            max-height: 200px;
         }
     }
 </style>
@@ -452,7 +444,14 @@
                 Lab
             </div>
         </a>
-        <nav>
+        
+        <button class="menu-toggle" aria-label="Ouvrir le menu de navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <nav class="main-nav">
             <a href="#hero">Accueil</a>
             <a href="#pourquoi">Pourquoi nous ?</a>
             <a href="#prestations">Prestations</a>
@@ -461,7 +460,6 @@
         </nav>
     </div>
 </header>
-
 <section id="hero">
     <div class="hero-inner">
         <div class="hero-slider">
@@ -625,6 +623,7 @@
 </footer>
 
 <script is:inline>
+    // Logique existante du slider
     const slides = document.querySelectorAll(".hero-slide");
     let index = 0;
     function showSlide(i) {
@@ -635,6 +634,23 @@
         index = (index + 1) % slides.length;
         showSlide(index);
     }, 6000);
+    
+    // NOUVELLE LOGIQUE POUR LE MENU HAMBURGER
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mainNav = document.querySelector(".main-nav");
+    const body = document.body;
+
+    // Fonction pour ouvrir/fermer le menu
+    menuToggle.addEventListener("click", () => {
+        body.classList.toggle("menu-open");
+    });
+
+    // Ferme le menu quand un lien de navigation est cliqué (pour ancrer la page)
+    mainNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            body.classList.remove("menu-open");
+        });
+    });
 </script>
 
 
