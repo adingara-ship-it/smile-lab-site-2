@@ -1,753 +1,249 @@
---- const logo = "/logo.png"; const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"]; ---
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smile Lab – Blanchiment Dentaire</title>
-    <meta
-        name="description"
-        content="Blanchiment dentaire américain à Mons. Produits vegan & cruelty-free, formule douce non agressive, résultats visibles dès la première séance, à domicile."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    />
-</head>
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+
+// CHEMINS D'IMAGES DIRECTEMENT DEPUIS PUBLIC/
+const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"]; 
+const beforeAfterPairs = [
+    { before: "/before1a.jpg", after: "/after1a.jpg", desc: "Traitement standard (30 min)" },
+    { before: "/before2b.jpg", after: "/after2b.jpg", desc: "Traitement intensif (60 min)" },
+];
+---
+
+<Layout title="Shine Clinic – Accueil" description="Blanchiment dentaire professionnel pour un sourire éclatant et durable.">
+
 <style>
-    :root {
-        --bg-page: #f7eedc;
-        --bg-section: #fbf5eb;
-        --marron: #b58b57;
-        --marron-soft: #a67c52;
-        --texte: #8c6239;
-        --white: #ffffff;
-        --gold-light: #fbe6c5;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-        margin: 0;
-        font-family: Inter, sans-serif;
-        background: var(--bg-page);
-        color: var(--texte);
-        scroll-behavior: smooth;
-    }
+    /* *** Styles de index.astro (inchangés depuis la dernière correction du slider) ***
+    */
     
-    body.menu-open {
-        overflow: hidden; 
+    /* --- TITRES --- */
+    .section-title {
+        font-weight: 700;
+        font-size: 40px; 
+        color: var(--color-text-title);
+        text-align: center;
+        margin-bottom: 10px;
+        letter-spacing: -0.7px;
+    }
+    .section-sub {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 60px; 
+        font-size: 19px;
+        color: var(--color-text-body);
+        opacity: 0.8;
     }
 
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-
-    /* HEADER */
-    header {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: var(--bg-section);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    }
-
-    .topbar {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 14px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .logo-wrap {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .logo-wrap img {
-        height: 52px;
-    }
-
-    .logo-text {
-        font-family: "Playfair Display", serif;
-        font-size: 18px;
-        color: var(--marron);
-        line-height: 1.1;
-    }
-    
-    /* Navigation Desktop */
-    nav.main-nav {
-        display: flex;
-        gap: 20px;
-        font-size: 15px;
-    }
-
-    nav a {
-        position: relative;
-        padding-bottom: 2px;
-    }
-
-    nav a::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        left: 0;
-        bottom: -2px;
-        height: 2px;
-        background: var(--marron);
-        transition: 0.2s;
-    }
-
-    nav a:hover::after {
-        width: 100%;
-    }
-    
-    /* Hamburger Toggle */
-    .menu-toggle {
-        display: none; 
-        padding: 10px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        margin-left: auto; 
-    }
-    .bar {
-        display: block;
-        width: 25px;
-        height: 3px;
-        margin: 5px 0;
-        background-color: var(--marron);
-        transition: 0.3s;
-    }
-
-    /* HERO */
+    /* --- HERO --- */
     #hero {
-        padding: 50px 20px;
-    }
-    .hero-inner {
-        max-width: 1100px;
-        margin: 0 auto;
+        padding: var(--section-padding-y) 0;
+        background: var(--color-secondary-bg); 
     }
     .hero-slider {
-        height: 360px;
-        border-radius: 20px;
+        height: 500px; 
+        border-radius: 16px;
         overflow: hidden;
-        position: relative;
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+        position: relative; 
+        box-shadow: 0 10px 30px rgba(60, 115, 255, 0.15);
+        max-width: var(--max-width);
+        margin: 0 auto;
     }
-    .hero-slide {
-        position: absolute;
+    .hero-slide { 
+        position: absolute; 
         inset: 0;
         opacity: 0;
         transition: opacity 0.7s ease;
+        z-index: 1; 
     }
     .hero-slide.active {
         opacity: 1;
     }
-    .hero-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    .hero-slider img {
+        width: 100%; height: 100%; object-fit: cover;
     }
     .hero-overlay {
-        position: absolute;
-        inset: 0;
-        padding: 40px;
+        position: absolute; 
+        inset: 0; 
+        padding: 60px; 
         background: linear-gradient(
-            to right,
-            rgba(247, 238, 220, 0.9),
-            rgba(247, 238, 220, 0.2)
+            to right, rgba(255, 255, 255, 0.95) 30%, rgba(255, 255, 255, 0.7) 60%, transparent
         );
-        display: flex;
+        display: flex; 
         align-items: center;
+        z-index: 10; 
     }
-    .hero-title {
-        font-family: "Playfair Display", serif;
-        font-size: 32px;
-        color: var(--marron);
-        margin-bottom: 10px;
-    }
-    .hero-subtitle {
-        font-size: 15px;
-        margin-bottom: 20px;
-    }
-    .hero-btns {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
+    .hero-title { font-size: 44px; margin-bottom: 12px; line-height: 1.1; max-width: 500px; }
+    .hero-subtitle { font-size: 18px; margin-bottom: 30px; max-width: 450px; opacity: 0.85; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 
-    /* Boutons et effets de survol */
-    .btn-primary,
-    .btn-ghost {
-        padding: 11px 20px;
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 600;
-    }
 
-    .btn-primary {
-        background: var(--marron);
-        color: white;
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-        transition: background 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .btn-primary:hover {
-        background: var(--marron-soft); 
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
-    }
-
-    .btn-ghost {
-        background: white;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        color: var(--marron-soft);
-        transition: background 0.3s ease, color 0.3s ease;
-    }
-    
-    .btn-ghost:hover {
-        background: var(--marron-soft);
-        color: white;
-    }
-
-    /* TITRES */
-    .section-title {
-        font-family: "Playfair Display", serif;
-        font-size: 30px;
-        color: var(--marron);
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .section-sub {
-        text-align: center;
-        max-width: 700px;
-        margin: 0 auto 40px;
-    }
-
-    /* POURQUOI NOUS (#pourquoi) */
+    /* --- POURQUOI NOUS (#pourquoi) --- */
     #pourquoi {
-        padding: 80px 20px;
-        background: var(--bg-section);
+        padding: var(--section-padding-y) var(--section-padding-x); 
     }
-
-    .section-inner {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-
     .why-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 22px;
+        gap: 30px; 
     }
-    
     .why-card {
-        background: white;
-        padding: 22px;
-        border-radius: 14px;
-        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: default;
+        background: white; padding: 30px; border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease;
     }
-    
-    .why-card:hover {
-        transform: translateY(-5px); 
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1); 
-    }
+    .why-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(60, 115, 255, 0.1); }
+    .why-card h3 { font-size: 20px; margin-bottom: 8px; }
 
-    .why-icon-wrap {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: var(--gold-light); 
-        border-radius: 50%;
-        margin-bottom: 12px;
-        font-size: 20px;
-    }
-
-    .why-title {
-        color: var(--marron);
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-
-    /* NOS PRESTATIONS (#prestations) */
-    #prestations {
-        padding: 80px 20px;
-    }
-
-    .prestations-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 22px;
-    }
-
-    .presta-card {
-        background: var(--bg-section);
-        padding: 26px;
-        border-radius: 16px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        border: 1px solid transparent;
-        transition: border-color 0.3s ease;
-    }
-    
-    .presta-card:hover {
-        border-color: var(--marron-soft);
-    }
-    
-    .presta-tag {
-        display: inline-block;
-        background: var(--marron);
-        color: white;
-        font-size: 12px;
-        font-weight: 600;
-        padding: 4px 10px;
-        border-radius: 999px;
-        margin-bottom: 15px;
-        text-transform: uppercase;
-    }
-
-    .presta-title {
-        font-weight: 700;
-        color: var(--marron);
-        font-size: 22px;
-        margin-bottom: 10px;
-    }
-    
-    .presta-desc {
-        font-size: 15px;
-        opacity: 0.8;
-    }
-
-    .presta-price {
-        margin-top: 20px;
-        font-size: 30px;
-        color: var(--marron); 
-        font-family: "Playfair Display", serif;
-        font-weight: 700;
-    }
-
-
-    /* AVANT / APRÈS & CONTACT / FOOTER (Styles inchangés) */
+    /* --- AVANT / APRÈS --- */
     #avant-apres {
-        padding: 80px 20px;
-        background: var(--bg-section);
+        padding: var(--section-padding-y) var(--section-padding-x);
+        background: var(--color-secondary-bg); 
     }
-    .before-after-wrapper {
-        max-width: 1100px;
-        margin: 0 auto;
+    .ba-gallery-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px; margin-top: 40px;
     }
-    .ba-columns {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 26px;
+    .ba-gallery-card { border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); text-align: center; }
+    .ba-image-container { position: relative; height: 300px; overflow: hidden; }
+    .ba-image-container img {
+        width: 50%; height: 100%; object-fit: cover; position: absolute;
+        transition: transform 0.5s ease, width 0.5s ease;
     }
-    .ba-col-title {
-        font-family: "Playfair Display", serif;
-        text-align: center;
-        font-size: 18px;
-        color: var(--marron);
-        margin-bottom: 10px;
-    }
-    .ba-col-img {
-        width: 100%;
-        max-height: 230px;
-        object-fit: cover;
-        border-radius: 14px;
-        margin-bottom: 16px;
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-    }
+    .ba-image-container .img-before { left: 0; }
+    .ba-image-container .img-after { right: 0; }
+    .ba-gallery-card:hover .img-before { transform: translateX(-100%); }
+    .ba-gallery-card:hover .img-after { width: 100%; }
+    .ba-card-info { padding: 15px 20px; background: white; border-top: 1px solid var(--color-secondary-bg); }
+    .ba-card-info h3 { font-size: 18px; font-weight: 700; }
+    .ba-card-info p { font-size: 14px; color: var(--color-primary); margin-top: 4px; }
+
+
+    /* --- CONTACT --- */
     #contact {
-        padding: 80px 20px;
-    }
-    .contact-text {
-        max-width: 700px;
-        margin: 0 auto 24px;
+        padding: var(--section-padding-y) var(--section-padding-x);
         text-align: center;
     }
-    .contact-actions {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        margin-bottom: 16px;
-        flex-wrap: wrap;
-    }
-    .contact-note {
-        text-align: center;
-        font-size: 14px;
-        opacity: 0.8;
-    }
-    footer {
-        background: var(--bg-section);
-        padding: 40px 20px;
-        text-align: center;
-    }
-    .footer-inner {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-    .footer-logo img {
-        height: 34px;
-        margin-bottom: 6px;
-    }
-    .footer-links {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-        margin: 10px 0;
-    }
-    .footer-madeby {
-        font-size: 12px;
-        opacity: 0.6;
-    }
+    .contact-text { font-size: 18px; max-width: 600px; margin: 0 auto 30px; opacity: 0.9; }
+    .contact-actions { display: flex; justify-content: center; gap: 16px; margin-bottom: 20px; }
 
-    /* SCROLL REVEAL ANIMATION */
-    .reveal {
-        opacity: 0;
-        transform: translateY(25px);
-        transition: opacity 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67), 
-                    transform 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-    }
-
-    .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* RESPONSIVE OPTIMISÉ */
-
-    /* Tablette et Mobile (<= 900px) */
-    @media (max-width: 900px) {
-        /* Menu Hamburger */
-        nav.main-nav {
-            display: none;
-        }
-        .menu-toggle {
-            display: block;
-        }
-        .why-grid,
-        .prestations-grid,
-        .ba-columns {
-            grid-template-columns: 1fr;
-        }
-
-        #pourquoi,
-        #prestations,
-        #avant-apres,
-        #contact {
-            padding: 60px 20px;
-        }
-        
-        /* Style du menu OUVERT */
-        body.menu-open nav.main-nav {
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-section);
-            z-index: 90;
-            padding: 100px 20px 20px;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 30px;
-            font-size: 20px;
-            overflow-y: auto;
-        }
-        
-        /* === LOGIQUE DE LA CROIX DE FERMETURE === */
-        body.menu-open .menu-toggle .bar:nth-child(2) {
-            opacity: 0; 
-        }
-        body.menu-open .menu-toggle .bar:nth-child(1) {
-            transform: translateY(8px) rotate(45deg); 
-        }
-        body.menu-open .menu-toggle .bar:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg); 
-        }
-        /* ======================================= */
-    }
-
-    /* Styles pour les petits téléphones (<= 550px) */
-    @media (max-width: 550px) {
-        .hero-slider {
-            height: 300px;
-        }
-
-        .hero-overlay {
-            padding: 30px;
-        }
-
-        .hero-title {
-            font-size: 28px;
-        }
-        
-        .section-title {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        
-        .hero-btns, .contact-actions {
-            flex-direction: column; 
-        }
-        
-        .btn-primary, .btn-ghost {
-            width: 100%; 
-            text-align: center;
-        }
-
-        .ba-col-img {
-            max-height: 200px;
-        }
-    }
 </style>
-<header>
-    <div class="topbar">
-        <a href="#hero" class="logo-wrap">
-            <img src={logo} alt="Smile Lab" />
-            <div class="logo-text">
-                Smile<br />
-                Lab
-            </div>
-        </a>
-        
-        <button class="menu-toggle" aria-label="Ouvrir le menu de navigation">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
 
-        <nav class="main-nav">
-            <a href="#hero">Accueil</a>
-            <a href="#pourquoi">Pourquoi nous ?</a>
-            <a href="#prestations">Prestations</a>
-            <a href="#avant-apres">Avant / Après</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </div>
-</header>
 
 <section id="hero">
-    <div class="hero-inner">
+    <div class="section-inner">
         <div class="hero-slider">
-            {heroSlides.map((img, index) => (
-                <div class={`hero-slide ${index === 0 ? "active" : ""}`}>
-                    <img src={img} alt="Sourire" />
-                </div>
-            ))}
+            
             <div class="hero-overlay">
                 <div>
-                    <h1 class="hero-title">Blanchiment dentaire américain</h1>
+                    <h1 class="hero-title">Le Blanchiment Dentaire Professionnel pour un Sourire Éclatant.</h1>
                     <p class="hero-subtitle">
-                        Produits vegan & cruelty-free, formule douce non
-                        agressive, résultats visibles dès la première séance.
+                        Révélez votre sourire le plus lumineux. Nous vous garantissons un soin rapide, sûr et des résultats spectaculaires dès la première séance.
                     </p>
                     <div class="hero-btns">
-                        <a href="#contact" class="btn-primary"
-                            >Prendre rendez-vous</a
-                        >
-                        <a href="#avant-apres" class="btn-ghost"
-                            >Voir les résultats</a
-                        >
+                        <a href="#contact" class="btn-primary">Prendre rendez-vous</a>
+                        <a href="#avant-apres" class="btn-ghost">Voir nos résultats</a>
                     </div>
                 </div>
             </div>
+            
+            {heroSlides.map((img, index) => (
+                <div class={`hero-slide ${index === 0 ? "active" : ""}`}> 
+                    <img src={img} alt={`Sourire éclatant ${index + 1}`} />
+                </div>
+            ))}
         </div>
     </div>
 </section>
 
 <section id="pourquoi">
     <div class="section-inner">
-        <h2 class="section-title reveal">Pourquoi choisir Smile Lab ?</h2>
-        <p class="section-sub reveal">
-            Un service de blanchiment dentaire pensé pour le confort, la
-            sécurité et un résultat lumineux dès la première séance.
+        <h2 class="section-title">L'excellence au Service de Votre Sourire</h2>
+        <p class="section-sub">
+            Notre protocole est conçu pour une efficacité maximale tout en assurant le confort et la sécurité de vos dents.
         </p>
         <div class="why-grid">
-            <div class="why-card reveal" style="transition-delay: 0.1s;">
-                <div class="why-icon-wrap">⭐</div>
-                <div class="why-title">Produits vegan & cruelty-free</div>
-                Produits non testés sur les animaux, sans ingrédients d’origine
-                animale, adaptés aux peaux sensibles.
+            <div class="why-card">
+                <h3>Sûreté & Douceur</h3>
+                Nos produits sont élaborés pour être doux, minimisant la sensibilité et assurant la protection de votre émail.
             </div>
-            <div class="why-card reveal" style="transition-delay: 0.2s;">
-                <div class="why-icon-wrap">💡</div>
-                <div class="why-title">Méthode américaine moderne</div>
-                Protocole inspiré des techniques américaines, efficace, rapide
-                et sûr.
+            <div class="why-card">
+                <h3>Expertise Professionnelle</h3>
+                Bénéficiez d'un protocole avancé, maîtrisé par nos spécialistes, pour des résultats homogènes et fiables.
             </div>
-            <div class="why-card reveal" style="transition-delay: 0.3s;">
-                <div class="why-icon-wrap">😌</div>
-                <div class="why-title">Non agressif & confortable</div>
-                Formule douce, respectueuse de l’émail, idéale pour un
-                résultat serein et lumineux.
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="prestations">
-    <div class="section-inner">
-        <h2 class="section-title reveal">Nos prestations</h2>
-        <p class="section-sub reveal">
-            Deux formules simples : boost de blancheur ou éclaircissement
-            renforcé.
-        </p>
-        <div class="prestations-grid">
-            <div class="presta-card reveal" style="transition-delay: 0.1s;">
-                <div class="presta-tag">Idéal première séance</div>
-                <div class="presta-title">Séance Standard</div>
-                <div class="presta-desc">
-                    Une séance complète pour gagner plusieurs teintes en douceur.
-                </div>
-                <div class="presta-price">70€</div>
-            </div>
-            <div class="presta-card reveal" style="transition-delay: 0.2s;">
-                <div class="presta-tag" style="background: #a67c52;">Intensif</div>
-                <div class="presta-title">Séance Premium</div>
-                <div class="presta-desc">
-                    Éclaircissement renforcé, idéal avant un évènement important.
-                </div>
-                <div class="presta-price">90€</div>
+            <div class="why-card">
+                <h3>Résultats Immédiats & Durables</h3>
+                Obtenez un éclaircissement visible dès la première séance, avec un impact durable sur l'éclat de votre sourire.
             </div>
         </div>
     </div>
 </section>
 
 <section id="avant-apres">
-    <div class="section-inner before-after-wrapper">
-        <h2 class="section-title reveal">Avant / Après</h2>
-        <p class="section-sub reveal">
-            Comparaison directe des résultats obtenus après une séance.
+    <div class="section-inner">
+        <h2 class="section-title">Nos Transformations</h2>
+        <p class="section-sub">
+            Découvrez l'effet de nos soins. Faites glisser votre souris sur les images pour voir le résultat.
         </p>
-        <div class="ba-columns reveal">
-            <div>
-                <h3 class="ba-col-title">Avant</h3>
-                <img src="/before1a.jpg" class="ba-col-img" alt="Avant 1" />
-                <img src="/before2b.jpg" class="ba-col-img" alt="Avant 2" />
-                <img src="/before.jpg" class="ba-col-img" alt="Avant 3" />
-            </div>
-            <div>
-                <h3 class="ba-col-title">Après</h3>
-                <img src="/after1a.jpg" class="ba-col-img" alt="Après 1" />
-                <img src="/after2b.jpg" class="ba-col-img" alt="Après 2" />
-                <img src="/after.jpg" class="ba-col-img" alt="Après 3" />
-            </div>
+        
+        <div class="ba-gallery-grid">
+            {beforeAfterPairs.map(pair => (
+                <div class="ba-gallery-card">
+                    <div class="ba-image-container">
+                        <img src={pair.before} class="img-before" alt="Avant Blanchiment" />
+                        <img src={pair.after} class="img-after" alt="Après Blanchiment" />
+                    </div>
+                    <div class="ba-card-info">
+                        <h3>Résultat Garanti</h3>
+                        <p>{pair.desc}</p>
+                    </div>
+                </div>
+            ))}
         </div>
     </div>
 </section>
 
 <section id="contact">
     <div class="section-inner">
-        <h2 class="section-title reveal">Prendre rendez-vous</h2>
-        <p class="contact-text reveal">
-            Choisis le mode de contact le plus simple pour toi.
+        <h2 class="section-title">Réservez votre Moment Shine</h2>
+        <p class="contact-text">
+            Prêt(e) à révéler l'éclat de votre sourire ? Prenez rendez-vous directement en ligne.
         </p>
-        <div class="contact-actions reveal">
+        <div class="contact-actions">
             <a
                 class="btn-primary"
                 target="_blank"
-                href="https://calendly.com/smilelabbelgium/seance-de-blanchiment-dentaire-a-domicile"
+                href="https://calendly.com/shineclinic/seance-de-blanchiment-dentaire"
             >
-                Réserver via Calendly
+                Réserver en ligne
             </a>
             <a
                 class="btn-ghost"
                 target="_blank"
-                href="https://www.instagram.com/smile_lab_belgium/"
+                href="https://www.instagram.com/shine_clinic_instagram/"
             >
-                Nous écrire sur Instagram
+                Écrivez-nous sur Instagram
             </a>
         </div>
-        <p class="contact-note">
-            Déplacement à domicile sur Mons et environs. Numéro WhatsApp
-            communiqué après prise de contact.
-        </p>
     </div>
 </section>
 
-<footer>
-    <div class="footer-inner reveal">
-        <div class="footer-logo">
-            <img src={logo} alt="Smile Lab" />
-        </div>
-        <p>
-            Blanchiment dentaire américain — Produits vegan & cruelty-free —
-            Déplacement à domicile (Mons)
-        </p>
-        <div class="footer-links">
-            <a
-                target="_blank"
-                href="https://www.instagram.com/smile_lab_belgium/"
-            >
-                Instagram
-            </a>
-            <span style="opacity: 0.4">WhatsApp (bientôt)</span>
-        </div>
-        <p>© 2025 Smile Lab — Tous droits réservés</p>
-        <p class="footer-madeby">Fait avec soin par A&A Web Designer</p>
-    </div>
-</footer>
-
 <script is:inline>
-    // Logique existante du slider
     const slides = document.querySelectorAll(".hero-slide");
     let index = 0;
+    
     function showSlide(i) {
         slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
     }
-    showSlide(0);
-    setInterval(() => {
-        index = (index + 1) % slides.length;
-        showSlide(index);
-    }, 6000);
     
-    // Logique du menu hamburger (avec croix de fermeture)
-    const menuToggle = document.querySelector(".menu-toggle");
-    const mainNav = document.querySelector(".main-nav");
-    const body = document.body;
-
-    menuToggle.addEventListener("click", () => {
-        body.classList.toggle("menu-open");
-    });
-
-    mainNav.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-            body.classList.remove("menu-open");
-        });
-    });
-
-    // LOGIQUE DU SCROLL REVEAL (Animation au défilement)
-    const revealElements = document.querySelectorAll('.reveal');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); 
-            }
-        });
-    }, {
-        threshold: 0.1 
-    });
-
-    revealElements.forEach(element => {
-        // Le délai est géré directement dans le HTML des cartes pour la séquence
-        observer.observe(element);
-    });
+    if (slides.length > 0) {
+        showSlide(0);
+        setInterval(() => {
+            index = (index + 1) % slides.length;
+            showSlide(index);
+        }, 6000);
+    }
 </script>
 
+</Layout>
 
 
 
