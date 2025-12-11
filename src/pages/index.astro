@@ -1,8 +1,7 @@
 ---
 // src/pages/index.astro
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-// Images depuis /public
 const heroSlides = ["/sous.jpg", "/sous1.jpg", "/sous2.jpg"];
 
 const beforeAfterPairs = [
@@ -12,485 +11,387 @@ const beforeAfterPairs = [
 ---
 
 <Layout title="Shine Clinic – Accueil" description="Blanchiment dentaire professionnel pour un sourire éclatant et durable.">
-  <style>
-    /* ============= TITRES GÉNÉRAUX ============= */
 
-    .section-title {
-      font-weight: 700;
-      font-size: 40px;
-      color: var(--color-text-title);
-      text-align: center;
-      margin-bottom: 10px;
-      letter-spacing: -0.7px;
-    }
+<style>
+/* ========================= */
+/*       GLOBAL SECTION      */
+/* ========================= */
 
-    .section-sub {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 60px;
-      font-size: 19px;
-      color: var(--color-text-body);
-      opacity: 0.85;
-    }
+.section-title {
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-text-title);
+  margin-bottom: 10px;
+}
 
-    /* ============= HERO ============= */
+.section-sub {
+  text-align: center;
+  font-size: 18px;
+  max-width: 800px;
+  margin: 0 auto 50px;
+  opacity: 0.85;
+}
 
-    #hero {
-      padding: var(--section-padding-y) 0;
-      background: var(--color-secondary-bg);
-    }
+/* ========================= */
+/*          HERO             */
+/* ========================= */
 
-    .hero-slider {
-      position: relative;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      height: 480px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(60, 115, 255, 0.15);
-    }
+#hero {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
 
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.7s ease;
-      z-index: 1;
-    }
+.hero-slider {
+  position: relative;
+  height: 480px;
+  min-height: 480px;
+  width: 100%;
+  border-radius: 0;
+  overflow: hidden;
+}
 
-    .hero-slide.active {
-      opacity: 1;
-    }
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
 
-    .hero-slider img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.hero-slide.active { opacity: 1; }
 
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      padding: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0.96) 30%,
-        rgba(255, 255, 255, 0.8) 55%,
-        transparent 80%
-      );
-    }
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-    .hero-content {
-      max-width: 520px;
-    }
+/* Overlay premium */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 60px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.95) 40%,
+    rgba(255, 255, 255, 0.85) 65%,
+    transparent
+  );
+  z-index: 10;
+}
 
-    .hero-title {
-      font-size: 44px;
-      line-height: 1.1;
-      margin-bottom: 14px;
-    }
+.hero-content {
+  max-width: 500px;
+}
 
-    .hero-subtitle {
-      font-size: 18px;
-      margin-bottom: 28px;
-      opacity: 0.9;
-    }
+.hero-title {
+  font-size: 42px;
+  margin-bottom: 12px;
+  line-height: 1.1;
+  font-weight: 700;
+}
 
-    .hero-btns {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
+.hero-subtitle {
+  font-size: 18px;
+  margin-bottom: 25px;
+  opacity: 0.9;
+}
 
-    /* ============= SECTION POURQUOI ============= */
+.hero-btns {
+  display: flex;
+  gap: 12px;
+}
 
-    #pourquoi {
-      padding: var(--section-padding-y) var(--section-padding-x);
-    }
+/* ========================= */
+/*         POURQUOI          */
+/* ========================= */
 
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-    }
+#pourquoi {
+  padding: var(--section-padding-y) var(--section-padding-x);
+}
 
-    .why-card {
-      background: #ffffff;
-      padding: 28px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
 
-    .why-card h3 {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
+.why-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  transition: 0.3s ease;
+}
 
-    .why-card p {
-      font-size: 15px;
-      color: var(--color-text-body);
-      opacity: 0.9;
-    }
+.why-card:hover {
+  transform: translateY(-4px);
+}
 
-    .why-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(60, 115, 255, 0.12);
-    }
+/* ========================= */
+/*        AVANT/APRÈS        */
+/* ========================= */
 
-    /* ============= AVANT / APRÈS ============= */
+#avant-apres {
+  background: var(--color-secondary-bg);
+  padding: var(--section-padding-y) var(--section-padding-x);
+}
 
-    #avant-apres {
-      padding: var(--section-padding-y) var(--section-padding-x);
-      background: var(--color-secondary-bg);
-    }
+.ba-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
 
-    .ba-gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
+.ba-gallery-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
 
-    .ba-gallery-card {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      background: #ffffff;
-    }
+.ba-image-container {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
 
-    .ba-image-container {
-      position: relative;
-      height: 300px;
-      overflow: hidden;
-    }
+.ba-image-container img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+}
 
-    .ba-image-container img {
-      width: 50%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      transition: transform 0.5s ease, width 0.5s ease;
-    }
+.img-before { left: 0; }
+.img-after { right: 0; }
 
-    .ba-image-container .img-before {
-      left: 0;
-    }
+@media (min-width: 769px) {
+  .ba-gallery-card:hover .img-before {
+    transform: translateX(-100%);
+    transition: 0.5s;
+  }
+  .ba-gallery-card:hover .img-after {
+    width: 100%;
+    transition: 0.5s;
+  }
+}
 
-    .ba-image-container .img-after {
-      right: 0;
-    }
+/* Mobile : afficher uniquement le "après" */
+@media (max-width: 768px) {
+  .img-before { display: none; }
+  .img-after { width: 100%; left: 0; }
+}
 
-    /* Hover uniquement desktop/tablette */
-    @media (min-width: 769px) {
-      .ba-gallery-card:hover .img-before {
-        transform: translateX(-100%);
-      }
-      .ba-gallery-card:hover .img-after {
-        width: 100%;
-      }
-    }
+.ba-card-info {
+  text-align: center;
+  padding: 15px;
+}
 
-    .ba-card-info {
-      padding: 15px 20px 18px;
-      border-top: 1px solid var(--color-secondary-bg);
-      text-align: center;
-    }
+.ba-card-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
 
-    .ba-card-info h3 {
-      font-size: 18px;
-      font-weight: 700;
-    }
+/* ========================= */
+/*         CONTACT           */
+/* ========================= */
 
-    .ba-card-info p {
-      font-size: 14px;
-      margin-top: 6px;
-      color: var(--color-primary);
-    }
+#contact {
+  text-align: center;
+  padding: var(--section-padding-y) var(--section-padding-x);
+}
 
-    /* ============= CONTACT ============= */
+.contact-text {
+  max-width: 600px;
+  margin: 0 auto 25px;
+  opacity: 0.85;
+}
 
-    #contact {
-      padding: var(--section-padding-y) var(--section-padding-x);
-      text-align: center;
-    }
+.contact-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
 
-    .contact-text {
-      font-size: 18px;
-      max-width: 600px;
-      margin: 0 auto 28px;
-      opacity: 0.9;
-    }
+/* ========================= */
+/*       RESPONSIVE          */
+/* ========================= */
 
-    .contact-actions {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+@media (max-width: 768px) {
+  .hero-slider {
+    height: 360px !important;
+    min-height: 360px !important;
+  }
 
-    /* ============= RESPONSIVE ============= */
+  .hero-overlay {
+    padding: 25px 20px;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.95) 45%,
+      rgba(255, 255, 255, 0.85) 65%,
+      transparent 100%
+    );
+  }
 
-    /* Tablet */
-    @media (max-width: 1024px) {
-      .hero-slider {
-        height: 420px;
-      }
+  .hero-title { font-size: 32px; }
+  .hero-subtitle { font-size: 15px; }
 
-      .hero-overlay {
-        padding: 40px;
-        background: linear-gradient(
-          to right,
-          rgba(255, 255, 255, 0.98) 40%,
-          rgba(255, 255, 255, 0.85) 70%,
-          transparent 100%
-        );
-      }
+  .hero-btns {
+    flex-direction: column;
+  }
 
-      .hero-title {
-        font-size: 36px;
-      }
+  .hero-btns a {
+    width: 100%;
+    text-align: center;
+  }
 
-      .why-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
 
-    /* Mobile général */
-    @media (max-width: 768px) {
-      .section-title {
-        font-size: 30px;
-      }
+  .ba-image-container {
+    height: 240px;
+  }
+}
 
-      .section-sub {
-        font-size: 16px;
-        margin-bottom: 40px;
-        padding: 0 8px;
-      }
+@media (max-width: 480px) {
+  .hero-slider {
+    height: 320px !important;
+  }
 
-      .hero-slider {
-        height: 380px;
-        border-radius: 12px;
-      }
+  .hero-title {
+    font-size: 26px;
+  }
+}
+</style>
 
-      .hero-overlay {
-        padding: 28px 22px;
-        align-items: flex-end;
-        justify-content: center;
-        background: linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0.98) 55%,
-          rgba(255, 255, 255, 0.9) 80%,
-          transparent 100%
-        );
-      }
+<!-- =========================== -->
+<!--            HERO             -->
+<!-- =========================== -->
 
-      .hero-content {
-        text-align: left;
-        max-width: 100%;
-      }
+<section id="hero">
+  <div class="hero-slider">
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Le blanchiment dentaire professionnel pour un sourire éclatant.
+        </h1>
 
-      .hero-title {
-        font-size: 30px;
-      }
+        <p class="hero-subtitle">
+          Révélez votre sourire le plus lumineux avec un soin rapide, sûr et efficace dès la première séance.
+        </p>
 
-      .hero-subtitle {
-        font-size: 15px;
-        margin-bottom: 20px;
-      }
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">Prendre rendez-vous</a>
+          <a href="#avant-apres" class="btn-ghost">Voir nos résultats</a>
+        </div>
+      </div>
+    </div>
 
-      .hero-btns {
-        flex-direction: column;
-      }
+    {heroSlides.map((img, index) => (
+      <div class={`hero-slide ${index === 0 ? "active" : ""}`}>
+        <img src={img} alt="Sourire éclatant" />
+      </div>
+    ))}
+  </div>
+</section>
 
-      .hero-btns .btn-primary,
-      .hero-btns .btn-ghost {
-        width: 100%;
-        text-align: center;
-      }
+<!-- =========================== -->
+<!--          POURQUOI           -->
+<!-- =========================== -->
 
-      .why-grid {
-        grid-template-columns: 1fr;
-      }
+<section id="pourquoi">
+  <div class="section-inner">
+    <h2 class="section-title">L'excellence au service de votre sourire</h2>
+    <p class="section-sub">
+      Une approche professionnelle, douce et efficace pour un éclaircissement optimal et durable.
+    </p>
 
-      .ba-image-container {
-        height: 260px;
-      }
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>Sûreté & douceur</h3>
+        Produits premium spécialement conçus pour les dents sensibles.
+      </div>
 
-      /* Sur mobile : montrer uniquement l'APRÈS (le résultat compte le plus) */
-      .ba-image-container .img-before {
-        display: none;
-      }
+      <div class="why-card">
+        <h3>Expertise professionnelle</h3>
+        Protocoles maîtrisés et résultats homogènes.
+      </div>
 
-      .ba-image-container .img-after {
-        position: relative;
-        width: 100%;
-        right: auto;
-      }
+      <div class="why-card">
+        <h3>Résultats immédiats</h3>
+        Jusqu’à 8 teintes de gain dès la première séance.
+      </div>
+    </div>
+  </div>
+</section>
 
-      .contact-text {
-        font-size: 16px;
-        padding: 0 10px;
-      }
+<!-- =========================== -->
+<!--         AVANT APRÈS         -->
+<!-- =========================== -->
 
-      .contact-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
+<section id="avant-apres">
+  <div class="section-inner">
+    <h2 class="section-title">Nos transformations</h2>
+    <p class="section-sub">Découvrez la différence Shine Clinic.</p>
 
-      .contact-actions a {
-        width: 100%;
-        text-align: center;
-      }
-    }
+    <div class="ba-gallery-grid">
+      {beforeAfterPairs.map((pair) => (
+        <div class="ba-gallery-card">
+          <div class="ba-image-container">
+            <img src={pair.before} class="img-before" alt="Avant" />
+            <img src={pair.after} class="img-after" alt="Après" />
+          </div>
 
-    /* Très petits écrans */
-    @media (max-width: 480px) {
-      .hero-slider {
-        height: 340px;
-      }
-
-      .hero-overlay {
-        padding: 22px 18px;
-      }
-
-      .hero-title {
-        font-size: 26px;
-      }
-    }
-  </style>
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="section-inner">
-      <div class="hero-slider">
-        <div class="hero-overlay">
-          <div class="hero-content">
-            <h1 class="hero-title">
-              Le blanchiment dentaire professionnel pour un sourire éclatant.
-            </h1>
-            <p class="hero-subtitle">
-              Révélez votre sourire le plus lumineux. Un soin rapide, sûr et des résultats spectaculaires dès la première séance.
-            </p>
-            <div class="hero-btns">
-              <a href="#contact" class="btn-primary">Prendre rendez-vous</a>
-              <a href="#avant-apres" class="btn-ghost">Voir nos résultats</a>
-            </div>
+          <div class="ba-card-info">
+            <h3>Résultat garanti</h3>
+            <p>{pair.desc}</p>
           </div>
         </div>
-
-        {heroSlides.map((img, index) => (
-          <div class={`hero-slide ${index === 0 ? 'active' : ''}`}>
-            <img src={img} alt={`Sourire éclatant ${index + 1}`} />
-          </div>
-        ))}
-      </div>
+      ))}
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- POURQUOI NOUS -->
-  <section id="pourquoi">
-    <div class="section-inner">
-      <h2 class="section-title">L'excellence au service de votre sourire</h2>
-      <p class="section-sub">
-        Notre protocole est conçu pour une efficacité maximale tout en assurant le confort et la sécurité de vos dents.
-      </p>
+<!-- =========================== -->
+<!--           CONTACT           -->
+<!-- =========================== -->
 
-      <div class="why-grid">
-        <div class="why-card">
-          <h3>Sûreté & douceur</h3>
-          <p>
-            Des produits élaborés pour minimiser la sensibilité et protéger durablement l’émail, même pour les sourires les plus sensibles.
-          </p>
-        </div>
-        <div class="why-card">
-          <h3>Expertise professionnelle</h3>
-          <p>
-            Un protocole maîtrisé, appliqué avec précision pour garantir un éclaircissement homogène et des résultats fiables.
-          </p>
-        </div>
-        <div class="why-card">
-          <h3>Résultats immédiats & durables</h3>
-          <p>
-            Un éclaircissement visible dès la première séance, avec un impact durable sur l’éclat et l’uniformité de votre sourire.
-          </p>
-        </div>
-      </div>
+<section id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">Réservez votre moment Shine</h2>
+    <p class="contact-text">
+      Réservez en ligne ou contactez-nous directement.
+    </p>
+
+    <div class="contact-actions">
+      <a href="https://calendly.com/shineclinic/seance-de-blanchiment-dentaire" target="_blank" class="btn-primary">
+        Réserver en ligne
+      </a>
+      <a href="https://www.instagram.com/shine_clinic_instagram/" target="_blank" class="btn-ghost">
+        Nous écrire sur Instagram
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- AVANT / APRÈS -->
-  <section id="avant-apres">
-    <div class="section-inner">
-      <h2 class="section-title">Nos transformations</h2>
-      <p class="section-sub">
-        Visualisez le résultat réel de nos soins. Sur ordinateur, survolez les images pour comparer l’avant et l’après.
-      </p>
+<script is:inline>
+  const slides = document.querySelectorAll(".hero-slide");
+  let idx = 0;
 
-      <div class="ba-gallery-grid">
-        {beforeAfterPairs.map((pair) => (
-          <div class="ba-gallery-card">
-            <div class="ba-image-container">
-              <img src={pair.before} class="img-before" alt="Avant blanchiment" loading="lazy" />
-              <img src={pair.after} class="img-after" alt="Après blanchiment" loading="lazy" />
-            </div>
-            <div class="ba-card-info">
-              <h3>Résultat garanti</h3>
-              <p>{pair.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  setInterval(() => {
+    slides[idx].classList.remove("active");
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add("active");
+  }, 6000);
+</script>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-inner">
-      <h2 class="section-title">Réservez votre moment Shine</h2>
-      <p class="contact-text">
-        Prêt(e) à révéler l’éclat de votre sourire ? Réservez votre séance en ligne ou contactez-nous directement.
-      </p>
-      <div class="contact-actions">
-        <a
-          class="btn-primary"
-          target="_blank"
-          href="https://calendly.com/shineclinic/seance-de-blanchiment-dentaire"
-        >
-          Réserver en ligne
-        </a>
-        <a
-          class="btn-ghost"
-          target="_blank"
-          href="https://www.instagram.com/shine_clinic_instagram/"
-        >
-          Écrivez-nous sur Instagram
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <script is:inline>
-    const slides = document.querySelectorAll(".hero-slide");
-    let index = 0;
-
-    function showSlide(i) {
-      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
-    }
-
-    if (slides.length > 0) {
-      showSlide(0);
-      setInterval(() => {
-        index = (index + 1) % slides.length;
-        showSlide(index);
-      }, 6000);
-    }
-  </script>
 </Layout>
 
 
