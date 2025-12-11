@@ -1,298 +1,337 @@
 ---
 // src/pages/tarifs.astro
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-// Définition des formules de prix avec le nouveau copywriting
 const pricingPlans = [
-    {
-        name: "Soin Découverte",
-        price: "79€",
-        duration: "30 min",
-        // NOUVEAU COPYWRITING
-        description: "Idéal pour une première expérience de l'éclat ou un entretien rapide de votre sourire.",
-        features: [
-            "Évaluation dentaire rapide",
-            "Soin de blanchiment express (30 minutes)",
-            "Protocole doux et efficace",
-            "Jusqu'à 4 teintes de gain visible"
-        ],
-        isPopular: false,
-    },
-    {
-        name: "Soin Signature (Recommandé)",
-        price: "129€",
-        duration: "60 min",
-        // NOUVEAU COPYWRITING
-        description: "Notre formule professionnelle complète, optimisée pour un résultat maximal, homogène et durable.",
-        features: [
-            "Diagnostic complet et personnalisé",
-            "Soin intensif de blanchiment (60 minutes)",
-            "Application de gel reminéralisant protecteur",
-            "Jusqu'à 8 teintes de gain garanti",
-            "Kit d'entretien premium offert (valeur 20€)"
-        ],
-        isPopular: true,
-    },
-    {
-        name: "Forfait Éclat Annuel",
-        price: "199€",
-        duration: "3 Soins (1 an)",
-        // NOUVEAU COPYWRITING
-        description: "Maintenez la blancheur parfaite toute l'année grâce à notre programme de renouvellement exclusif.",
-        features: [
-            "1 Soin Signature initial (60 min)",
-            "2 Soins Découverte d'entretien (30 min)",
-            "Résultats garantis sur 12 mois",
-            "Priorité sur la prise de rendez-vous",
-            "10% de réduction sur les produits complémentaires"
-        ],
-        isPopular: false,
-    },
+  {
+    name: "Soin Découverte",
+    price: "79€",
+    duration: "30 min",
+    description:
+      "Idéal pour une première expérience de l'éclat ou un entretien rapide de votre sourire.",
+    features: [
+      "Évaluation dentaire rapide",
+      "Soin de blanchiment express (30 minutes)",
+      "Protocole doux et efficace",
+      "Jusqu'à 4 teintes de gain visible",
+    ],
+    isPopular: false,
+  },
+  {
+    name: "Soin Signature (Recommandé)",
+    price: "129€",
+    duration: "60 min",
+    description:
+      "Notre formule professionnelle complète, optimisée pour un résultat maximal, homogène et durable.",
+    features: [
+      "Diagnostic complet et personnalisé",
+      "Soin intensif de blanchiment (60 minutes)",
+      "Application de gel reminéralisant protecteur",
+      "Jusqu'à 8 teintes de gain garanti",
+      "Kit d'entretien premium offert (valeur 20€)",
+    ],
+    isPopular: true,
+  },
+  {
+    name: "Forfait Éclat Annuel",
+    price: "199€",
+    duration: "3 Soins (1 an)",
+    description:
+      "Maintenez la blancheur parfaite toute l'année grâce à notre programme de renouvellement exclusif.",
+    features: [
+      "1 Soin Signature initial (60 min)",
+      "2 Soins Découverte d'entretien (30 min)",
+      "Résultats garantis sur 12 mois",
+      "Priorité sur la prise de rendez-vous",
+      "10% de réduction sur les produits complémentaires",
+    ],
+    isPopular: false,
+  },
 ];
 
-// FAQ pour la page Tarifs (Accents vérifiés et corrigés)
 const faq = [
-    {
-        question: "Le blanchiment est-il douloureux ?",
-        answer: "Absolument pas. Nous utilisons une formule douce et un protocole adapté aux dents sensibles, garantissant une séance sans douleur ni inconfort."
-    },
-    {
-        question: "Combien de temps durent les résultats ?",
-        answer: "Avec notre Soin Signature, les résultats durent en moyenne 6 à 12 mois, en fonction de votre hygiène de vie (café, thé, tabac). Un soin d'entretien est recommandé pour maximiser la durée."
-    },
-    {
-        question: "Qui peut bénéficier de ces soins ?",
-        answer: "Toute personne majeure ayant des dents et gencives saines peut bénéficier du blanchiment dentaire. Une consultation préalable est effectuée pour s'assurer de l'absence de contre-indications."
-    }
+  {
+    question: "Le blanchiment est-il douloureux ?",
+    answer:
+      "Absolument pas. Nous utilisons une formule douce et un protocole adapté aux dents sensibles, garantissant une séance sans douleur ni inconfort.",
+  },
+  {
+    question: "Combien de temps durent les résultats ?",
+    answer:
+      "Avec notre Soin Signature, les résultats durent en moyenne 6 à 12 mois selon votre hygiène de vie. Un soin d'entretien prolonge la blancheur.",
+  },
+  {
+    question: "Qui peut bénéficier de ces soins ?",
+    answer:
+      "Toute personne majeure ayant des dents et gencives saines peut bénéficier du blanchiment dentaire. Une consultation préalable est effectuée.",
+  },
 ];
 ---
 
 <Layout title="Shine Clinic – Tarifs">
 
 <style>
-    /* Styles spécifiques pour la page Tarifs (Inchangés) */
-    
+  /* HERO PAGE TITLE */
+  .page-hero {
+    padding: 80px 0;
+    background: var(--color-secondary-bg);
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .page-hero h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+  }
+  .page-hero p {
+    font-size: 20px;
+    color: var(--color-text-light);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* PRICING GRID */
+  .pricing-grid {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--section-padding-x);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 35px;
+  }
+
+  .plan-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    border: 2px solid transparent;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease;
+    position: relative;
+  }
+
+  .plan-card.is-popular {
+    border-color: var(--color-primary);
+    transform: translateY(-6px);
+    box-shadow: 0 18px 50px rgba(60, 115, 255, 0.25);
+  }
+
+  .plan-card.is-popular::before {
+    content: "⭐ POPULAIRE";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    padding: 4px 14px;
+    color: white;
+    font-size: 12px;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+
+  .plan-card h2 {
+    font-size: 26px;
+    margin-bottom: 6px;
+  }
+
+  .plan-duration {
+    display: block;
+    font-size: 14px;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+  }
+
+  .plan-price {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+  }
+
+  .plan-card p {
+    font-size: 16px;
+    opacity: 0.9;
+    min-height: 50px;
+    margin-bottom: 25px;
+  }
+
+  .plan-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 25px;
+  }
+
+  .plan-features li {
+    padding: 9px 0;
+    font-size: 15px;
+    border-bottom: 1px dashed var(--color-secondary-bg);
+    display: flex;
+  }
+
+  .plan-features li::before {
+    content: "✔";
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-right: 10px;
+  }
+
+  .plan-card .btn-primary {
+    display: block;
+    width: 100%;
+  }
+
+  /* FAQ SECTION */
+  #faq {
+    padding: 4rem 1rem 6rem;
+    background: var(--color-secondary-bg);
+    margin-top: 5rem;
+  }
+
+  .faq-title {
+    font-size: 38px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .faq-list {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .faq-question {
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .faq-question::after {
+    content: "+";
+    font-size: 22px;
+    transition: 0.3s;
+  }
+
+  .faq-item.active .faq-question::after {
+    content: "−";
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    transition: max-height 0.4s ease-out, padding 0.3s ease-out;
+    color: var(--color-text-light);
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 200px;
+    padding: 0 20px 20px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
     .page-hero {
-        padding: 50px 0;
-        background: var(--color-secondary-bg);
-        text-align: center;
-        margin-bottom: 6rem;
+      padding: 60px 0;
     }
     .page-hero h1 {
-        font-size: 56px;
-        margin-bottom: 10px;
+      font-size: 38px;
+      padding: 0 10px;
     }
     .page-hero p {
-        font-size: 20px;
-        color: var(--color-text-light);
+      font-size: 16px;
     }
 
-    /* --- GRILLE DE PRIX --- */
-    .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 0 var(--section-padding-x);
-    }
     .plan-card {
-        background: white;
-        border-radius: 16px;
-        padding: 40px;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        border: 2px solid transparent;
-        transition: all 0.3s ease;
-        position: relative;
-    }
-    .plan-card.is-popular {
-        border-color: var(--color-primary);
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(60, 115, 255, 0.2);
-    }
-    .plan-card.is-popular::before {
-        content: "⭐ POPULAIRE";
-        position: absolute;
-        top: -15px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--color-primary);
-        color: white;
-        padding: 5px 15px;
-        border-radius: 99px;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-    }
-
-    .plan-card h2 {
-        font-size: 24px;
-        margin-bottom: 10px;
+      padding: 30px;
     }
     .plan-price {
-        font-size: 48px;
-        font-weight: 700;
-        color: var(--color-primary);
-        line-height: 1;
-        margin-bottom: 5px;
-    }
-    .plan-duration {
-        font-size: 14px;
-        color: var(--color-text-light);
-        margin-bottom: 25px;
-        display: block;
-    }
-    .plan-card p {
-        font-size: 16px;
-        margin-bottom: 30px;
-        min-height: 48px; 
+      font-size: 40px;
     }
 
-    .plan-features {
-        list-style: none;
-        text-align: left;
-        margin-bottom: 30px;
-    }
-    .plan-features li {
-        padding: 8px 0;
-        font-size: 16px;
-        border-bottom: 1px dashed var(--color-secondary-bg);
-        display: flex;
-        align-items: flex-start;
-    }
-    .plan-features li::before {
-        content: '✔';
-        color: var(--color-primary);
-        font-weight: 700;
-        margin-right: 10px;
-        font-size: 1.1em;
-        line-height: 1.5;
-    }
-    
-    /* --- SECTION FAQ --- */
-    #faq {
-        padding: 4rem var(--section-padding-x) var(--section-padding-y);
-        margin-top: 6rem;
-        background: var(--color-secondary-bg);
-    }
     .faq-title {
-        font-size: 40px; 
-        text-align: center;
-        margin-bottom: 50px;
+      font-size: 30px;
     }
-    .faq-list {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    .faq-item {
-        background: white;
-        margin-bottom: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        overflow: hidden;
-    }
-    .faq-question {
-        padding: 20px;
-        font-size: 18px;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        user-select: none;
-    }
-    .faq-question::after {
-        content: '+';
-        font-size: 24px;
-        transition: transform 0.3s ease;
-    }
-    .faq-answer {
-        padding: 0 20px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-        color: var(--color-text-light);
-    }
-    .faq-item.active .faq-question::after {
-        content: '−';
-        transform: rotate(180deg);
-    }
-    .faq-item.active .faq-answer {
-        max-height: 200px; 
-        padding: 0 20px 20px 20px;
-    }
-    /* S'assure que le titre du Hero de cette page s'adapte aussi */
-    @media (max-width: 600px) {
-        .page-hero h1 {
-            font-size: 40px;
-        }
-    }
+  }
 
+  @media (max-width: 480px) {
+    .page-hero h1 {
+      font-size: 32px;
+    }
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
 <section class="page-hero">
-    <div class="section-inner">
-        <h1>Nos Tarifs et Formules</h1>
-        <p>Découvrez nos plans de blanchiment dentaire pour un sourire éclatant adapté à votre budget et vos besoins.</p>
-    </div>
+  <div class="section-inner">
+    <h1>Nos Tarifs et Formules</h1>
+    <p>
+      Découvrez nos soins professionnels, conçus pour révéler un sourire éclatant tout en respectant votre confort
+      et votre budget.
+    </p>
+  </div>
 </section>
 
 <section id="tarifs">
-    <div class="pricing-grid">
-        {pricingPlans.map(plan => (
-            <div class={`plan-card ${plan.isPopular ? "is-popular" : ""}`}>
-                <h2>{plan.name}</h2>
-                <span class="plan-duration">{plan.duration}</span>
-                <div class="plan-price">{plan.price}</div>
-                
-                <p>{plan.description}</p>
+  <div class="pricing-grid">
+    {pricingPlans.map((plan) => (
+      <div class={`plan-card ${plan.isPopular ? "is-popular" : ""}`}>
+        <h2>{plan.name}</h2>
+        <span class="plan-duration">{plan.duration}</span>
+        <div class="plan-price">{plan.price}</div>
 
-                <ul class="plan-features">
-                    {plan.features.map(feature => <li>{feature}</li>)}
-                </ul>
+        <p>{plan.description}</p>
 
-                <a href="/#contact" class="btn-primary">
-                    Réserver ce Soin
-                </a>
-            </div>
-        ))}
-    </div>
+        <ul class="plan-features">
+          {plan.features.map((f) => (
+            <li>{f}</li>
+          ))}
+        </ul>
+
+        <a href="/#contact" class="btn-primary">Réserver ce soin</a>
+      </div>
+    ))}
+  </div>
 </section>
 
 <section id="faq">
-    <div class="section-inner">
-        <h2 class="faq-title">Questions Fréquemment Posées</h2>
-        <div class="faq-list">
-            {faq.map((item, index) => (
-                <div class="faq-item">
-                    <div class="faq-question">
-                        {item.question}
-                    </div>
-                    <div class="faq-answer">
-                        <p>{item.answer}</p>
-                    </div>
-                </div>
-            ))}
+  <h2 class="faq-title">Questions Fréquemment Posées</h2>
+
+  <div class="faq-list">
+    {faq.map((item) => (
+      <div class="faq-item">
+        <div class="faq-question">{item.question}</div>
+        <div class="faq-answer">
+          <p>{item.answer}</p>
         </div>
-    </div>
+      </div>
+    ))}
+  </div>
 </section>
 
 <script is:inline>
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            // Ferme tous les autres items
-            faqItems.forEach(i => {
-                if (i !== item && i.classList.contains('active')) {
-                    i.classList.remove('active');
-                }
-            });
-            // Ouvre ou ferme l'item cliqué
-            item.classList.toggle('active');
-        });
+  const faqItems = document.querySelectorAll(".faq-item");
+
+  faqItems.forEach((item) => {
+    item.querySelector(".faq-question").addEventListener("click", () => {
+      faqItems.forEach((i) => {
+        if (i !== item) i.classList.remove("active");
+      });
+      item.classList.toggle("active");
     });
+  });
 </script>
 
 </Layout>
