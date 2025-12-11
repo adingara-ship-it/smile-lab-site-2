@@ -3,12 +3,12 @@
 const { title = "Shine Clinic", description = "Esthétique dentaire premium" } = Astro.props;
 const logo = "/logo.png"; 
 
-// 🎯 TEXTES ACCENTUÉS CORRIGÉS
+// TEXTES ACCENTUÉS CORRIGÉS
 const navLinks = [
     { href: "/", label: "Accueil" },
     { href: "/tarifs", label: "Tarifs" },
     { href: "/#avant-apres", label: "Résultats" },
-    { href: "/#contact", label: "Rendez-vous" } // 'é' corrigé
+    { href: "/#contact", label: "Rendez-vous" } 
 ];
 ---
 
@@ -175,7 +175,7 @@ const navLinks = [
       }
 
 
-      /* --- RESPONSIVE / HAMBURGER --- */
+      /* --- RESPONSIVE / HAMBURGER (Base) --- */
       .menu-toggle { display: none; padding: 10px; background: none; border: none; cursor: pointer; margin-left: auto; }
       .bar { display: block; width: 25px; height: 3px; margin: 5px 0; background-color: var(--color-primary); transition: 0.3s; }
       .main-nav-mobile {
@@ -184,9 +184,39 @@ const navLinks = [
           transform: translateX(100%); transition: transform 0.3s ease-out; display: none; 
       }
       body.menu-open .main-nav-mobile { transform: translateX(0); display: flex; }
+      
+      /* --- RESPONSIVE GÉNÉRALE (Règles critiques) --- */
       @media (max-width: 900px) {
+          /* Masque la navigation Desktop et affiche le bouton Hamburger */
           nav.main-nav { display: none; }
           .menu-toggle { display: block; }
+
+          /* Diminue la taille du logo sur mobile/tablette */
+          header.is-sticky .logo-wrap img { height: 45px; }
+          .logo-wrap img { height: 60px; }
+      }
+      
+      @media (max-width: 768px) {
+          /* Diminution des paddings et marges générales */
+          :root {
+              --section-padding-y: 3.5rem; /* Rendre les sections moins hautes */
+              --section-padding-x: 1rem; /* Padding minimum de 16px sur les côtés */
+          }
+
+          /* Les grilles forcées en colonne simple pour éviter le débordement */
+          .pricing-grid, .why-grid, .ba-gallery-grid {
+              grid-template-columns: 1fr;
+          }
+
+          /* Adaptation des gros titres pour ne pas dépasser la largeur de l'écran */
+          h1, .hero-title { font-size: 38px !important; }
+          h2, .section-title { font-size: 30px !important; }
+          h3 { font-size: 18px !important; }
+
+          .contact-actions {
+              flex-direction: column; /* Empile les boutons */
+              gap: 10px;
+          }
       }
     </style>
     
@@ -226,7 +256,7 @@ const navLinks = [
                 <img src={logo} alt="Shine Clinic Logo" />
             </div>
             <p>
-                Shine Clinic Esthétique Dentaire Premium — Formule Végan & Cruelty-Free
+                Shine Clinic Esthétique Dentaire Premium.
             </p>
             <div class="footer-links">
                 <a target="_blank" href="https://www.instagram.com/shine_clinic_instagram/">Instagram</a>
