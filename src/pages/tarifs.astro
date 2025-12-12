@@ -8,42 +8,41 @@ const pricingPlans = [
     price: "79€",
     duration: "30 min",
     description:
-      "Idéal pour une première expérience de l'éclat ou un entretien rapide de votre sourire.",
+      "Idéal pour une première expérience ou un entretien rapide du sourire.",
     features: [
-      "Évaluation dentaire rapide",
-      "Soin de blanchiment express (30 minutes)",
-      "Protocole doux et efficace",
-      "Jusqu'à 4 teintes de gain visible",
+      "Évaluation dentaire",
+      "Blanchiment express (30 min)",
+      "Protocole doux",
+      "Jusqu’à 4 teintes gagnées",
     ],
     isPopular: false,
   },
   {
-    name: "Soin Signature (Recommandé)",
+    name: "Soin Signature",
     price: "129€",
     duration: "60 min",
     description:
-      "Notre formule professionnelle complète, optimisée pour un résultat maximal, homogène et durable.",
+      "Notre soin complet pour un résultat maximal, homogène et durable.",
     features: [
-      "Diagnostic complet et personnalisé",
-      "Soin intensif de blanchiment (60 minutes)",
-      "Application de gel reminéralisant protecteur",
-      "Jusqu'à 8 teintes de gain garanti",
-      "Kit d'entretien premium offert (valeur 20€)",
+      "Diagnostic personnalisé",
+      "Blanchiment intensif (60 min)",
+      "Gel reminéralisant",
+      "Jusqu’à 8 teintes gagnées",
+      "Kit d’entretien offert",
     ],
     isPopular: true,
   },
   {
     name: "Forfait Éclat Annuel",
     price: "199€",
-    duration: "3 soins (1 an)",
+    duration: "3 soins / an",
     description:
-      "Maintenez la blancheur parfaite toute l'année grâce à notre programme de renouvellement exclusif.",
+      "Pour conserver un sourire éclatant toute l’année.",
     features: [
-      "1 Soin Signature initial (60 min)",
-      "2 Soins Découverte d'entretien (30 min)",
-      "Résultats garantis sur 12 mois",
-      "Priorité sur la prise de rendez-vous",
-      "10% de réduction sur les produits complémentaires",
+      "1 Soin Signature",
+      "2 soins d’entretien",
+      "Résultats durables",
+      "Priorité de réservation",
     ],
     isPopular: false,
   },
@@ -53,134 +52,107 @@ const faq = [
   {
     question: "Le blanchiment est-il douloureux ?",
     answer:
-      "Non. Nous utilisons une formule douce et un protocole adapté aux dents sensibles. Une légère sensibilité temporaire peut apparaître, mais elle est rare et disparaît rapidement.",
+      "Non. Nos protocoles sont conçus pour minimiser la sensibilité. Une légère gêne temporaire peut apparaître mais reste rare.",
   },
   {
     question: "Combien de temps durent les résultats ?",
     answer:
-      "Les résultats durent en moyenne de 6 à 12 mois selon votre hygiène de vie. Des soins d'entretien réguliers permettent de prolonger la blancheur.",
+      "Entre 6 et 12 mois selon votre hygiène de vie. Des soins d’entretien permettent de prolonger la blancheur.",
   },
   {
-    question: "Qui peut bénéficier de ces soins ?",
+    question: "Y a-t-il des contre-indications ?",
     answer:
-      "Toute personne majeure avec des dents et gencives saines. Les femmes enceintes ou allaitantes et les personnes présentant des pathologies dentaires non traitées ne sont pas éligibles.",
+      "Les femmes enceintes ou allaitantes, ainsi que les personnes ayant des pathologies dentaires non traitées, ne sont pas éligibles.",
   },
 ];
 ---
 
-<Layout title="Shine Clinic – Tarifs & FAQ">
+<Layout title="Shine Clinic – Tarifs">
 
 <style>
 /* ================= HERO ================= */
 
 .page-hero {
-  padding: 70px 0;
+  padding: 70px 0 50px;
   background: var(--color-secondary-bg);
   text-align: center;
-  margin-bottom: 4rem;
 }
 
 .page-hero h1 {
-  font-size: 48px;
+  font-size: 34px;
   margin-bottom: 12px;
 }
 
 .page-hero p {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--color-text-light);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ================= TARIFS ================= */
+
+#tarifs {
+  padding: var(--section-padding-y) 0;
+}
+
+.pricing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
   max-width: 720px;
   margin: 0 auto;
 }
 
-/* ================= PRICING ================= */
-
-#tarifs {
-  padding-bottom: var(--section-padding-y);
-}
-
-.pricing-grid {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--section-padding-x);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
-}
-
 .plan-card {
   background: white;
-  padding: 36px;
   border-radius: 18px;
-  text-align: left;
+  padding: 28px;
   border: 1px solid var(--color-secondary-bg);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-  display: flex;
-  flex-direction: column;
-}
-
-.plan-card.is-popular {
-  border-color: var(--color-primary);
-  box-shadow: 0 16px 40px rgba(60,115,255,0.2);
-}
-
-.plan-card.is-popular::before {
-  content: "Recommandé";
-  position: absolute;
-  top: -14px;
-  left: 24px;
-  background: var(--color-primary);
-  color: white;
-  padding: 4px 12px;
-  font-size: 12px;
-  border-radius: 999px;
-  font-weight: 600;
 }
 
 .plan-card h2 {
-  font-size: 24px;
+  font-size: 22px;
   margin-bottom: 4px;
 }
 
 .plan-duration {
   font-size: 14px;
   color: var(--color-text-light);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .plan-price {
-  font-size: 44px;
+  font-size: 40px;
   font-weight: 700;
   color: var(--color-primary);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .plan-card p {
   font-size: 15px;
-  opacity: 0.9;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .plan-features {
   list-style: none;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .plan-features li {
-  padding: 8px 0;
   font-size: 15px;
+  padding: 6px 0;
   display: flex;
-  align-items: flex-start;
 }
 
 .plan-features li::before {
   content: "✔";
   color: var(--color-primary);
-  font-weight: 700;
-  margin-right: 10px;
+  margin-right: 8px;
 }
 
 .plan-card .btn-primary {
-  margin-top: auto;
+  width: 100%;
 }
 
 /* ================= FAQ ================= */
@@ -191,40 +163,34 @@ const faq = [
 }
 
 .faq-title {
-  font-size: 36px;
   text-align: center;
+  font-size: 30px;
   margin-bottom: 36px;
 }
 
 .faq-list {
-  max-width: 880px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 0 var(--section-padding-x);
 }
 
 .faq-item {
   background: white;
-  border-radius: 12px;
+  border-radius: 14px;
   margin-bottom: 14px;
-  overflow: hidden;
-  border: 1px solid var(--color-secondary-bg);
+  padding: 18px 20px;
+  cursor: pointer;
 }
 
 .faq-question {
-  padding: 18px 20px;
-  font-size: 17px;
   font-weight: 600;
-  cursor: pointer;
+  font-size: 16px;
   position: relative;
 }
 
 .faq-question::after {
   content: "+";
   position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 22px;
+  right: 0;
 }
 
 .faq-item.active .faq-question::after {
@@ -232,63 +198,66 @@ const faq = [
 }
 
 .faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease;
-  padding: 0 20px;
-}
-
-.faq-item.active .faq-answer {
-  max-height: 200px;
-  padding-bottom: 18px;
-}
-
-.faq-answer p {
+  display: none;
+  margin-top: 10px;
   font-size: 15px;
-  line-height: 1.7;
   color: var(--color-text-body);
 }
 
-/* ================= RESPONSIVE ================= */
+.faq-item.active .faq-answer {
+  display: block;
+}
 
-@media (max-width: 768px) {
-  .page-hero {
-    padding: 50px 0;
-  }
+/* ================= DESKTOP ================= */
+
+@media (min-width: 900px) {
 
   .page-hero h1 {
-    font-size: 38px;
+    font-size: 48px;
   }
 
-  .page-hero p {
-    font-size: 15px;
+  .pricing-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: var(--max-width);
   }
 
-  .plan-card {
-    padding: 28px;
+  .plan-card.is-popular {
+    border-color: var(--color-primary);
+    transform: translateY(-6px);
   }
 
-  .faq-title {
-    font-size: 30px;
+  .plan-card.is-popular::before {
+    content: "Recommandé";
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--color-primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
   }
 }
 </style>
 
 <section class="page-hero">
   <div class="section-inner">
-    <h1>Nos Tarifs et Formules</h1>
+    <h1>Nos soins & tarifs</h1>
     <p>
-      Des soins professionnels conçus pour révéler un sourire éclatant, en toute sécurité et transparence.
+      Des formules claires, transparentes et adaptées à vos besoins.
     </p>
   </div>
 </section>
 
 <section id="tarifs">
-  <div class="pricing-grid">
+  <div class="section-inner pricing-list">
     {pricingPlans.map(plan => (
       <div class={`plan-card ${plan.isPopular ? "is-popular" : ""}`}>
         <h2>{plan.name}</h2>
-        <span class="plan-duration">{plan.duration}</span>
+        <div class="plan-duration">{plan.duration}</div>
         <div class="plan-price">{plan.price}</div>
 
         <p>{plan.description}</p>
@@ -297,33 +266,30 @@ const faq = [
           {plan.features.map(f => <li>{f}</li>)}
         </ul>
 
-        <a href="/#contact" class="btn-primary btn-base">Réserver ce soin</a>
+        <a href="/#contact" class="btn-primary">Réserver ce soin</a>
       </div>
     ))}
   </div>
 </section>
 
 <section id="faq">
-  <h2 class="faq-title">Questions fréquentes</h2>
+  <div class="section-inner">
+    <h2 class="faq-title">Questions fréquentes</h2>
 
-  <div class="faq-list">
-    {faq.map(item => (
-      <div class="faq-item">
-        <div class="faq-question">{item.question}</div>
-        <div class="faq-answer">
-          <p>{item.answer}</p>
+    <div class="faq-list">
+      {faq.map(item => (
+        <div class="faq-item">
+          <div class="faq-question">{item.question}</div>
+          <div class="faq-answer">{item.answer}</div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </section>
 
 <script is:inline>
 document.querySelectorAll(".faq-item").forEach(item => {
-  item.querySelector(".faq-question").addEventListener("click", () => {
-    document.querySelectorAll(".faq-item").forEach(i => {
-      if (i !== item) i.classList.remove("active");
-    });
+  item.addEventListener("click", () => {
     item.classList.toggle("active");
   });
 });
