@@ -14,7 +14,7 @@ const beforeAfterPairs = [
 
 <style>
 /* ========================= */
-/*       GLOBAL SECTION      */
+/*      GLOBAL SECTIONS      */
 /* ========================= */
 
 .section-title {
@@ -39,27 +39,28 @@ const beforeAfterPairs = [
 
 #hero {
   position: relative;
-  padding: 0;
+  width: 100%;
+  height: 90vh;
+  min-height: 520px;
   overflow: hidden;
 }
 
+/* Slider plein écran */
 .hero-slider {
-  position: relative;
-  height: 480px;
-  min-height: 480px;
-  width: 100%;
-  border-radius: 0;
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
 }
 
 .hero-slide {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.7s ease;
+  transition: opacity 0.8s ease;
 }
 
-.hero-slide.active { opacity: 1; }
+.hero-slide.active {
+  opacity: 1;
+}
 
 .hero-slide img {
   width: 100%;
@@ -67,42 +68,49 @@ const beforeAfterPairs = [
   object-fit: cover;
 }
 
-/* Overlay premium */
+/* Overlay sombre PREMIUM (FINI LE BLANC) */
 .hero-overlay {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
-  padding: 60px;
+  align-items: flex-end;
+  padding: 32px 20px 48px;
   background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.95) 40%,
-    rgba(255, 255, 255, 0.85) 65%,
-    transparent
+    to top,
+    rgba(0, 0, 0, 0.65) 20%,
+    rgba(0, 0, 0, 0.4) 45%,
+    rgba(0, 0, 0, 0.15) 70%,
+    transparent 100%
   );
   z-index: 10;
 }
 
 .hero-content {
-  max-width: 500px;
+  max-width: 620px;
 }
 
 .hero-title {
-  font-size: 42px;
-  margin-bottom: 12px;
+  color: #fff;
+  font-size: 32px;
   line-height: 1.1;
-  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .hero-subtitle {
-  font-size: 18px;
-  margin-bottom: 25px;
-  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  margin-bottom: 18px;
 }
 
 .hero-btns {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-btns a {
+  width: 100%;
+  text-align: center;
 }
 
 /* ========================= */
@@ -124,7 +132,7 @@ const beforeAfterPairs = [
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-  transition: 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .why-card:hover {
@@ -132,7 +140,7 @@ const beforeAfterPairs = [
 }
 
 /* ========================= */
-/*        AVANT/APRÈS        */
+/*        AVANT / APRÈS      */
 /* ========================= */
 
 #avant-apres {
@@ -147,10 +155,10 @@ const beforeAfterPairs = [
 }
 
 .ba-gallery-card {
-  background: white;
+  background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .ba-image-container {
@@ -160,11 +168,11 @@ const beforeAfterPairs = [
 }
 
 .ba-image-container img {
+  position: absolute;
+  top: 0;
   width: 50%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
-  top: 0;
 }
 
 .img-before { left: 0; }
@@ -181,7 +189,7 @@ const beforeAfterPairs = [
   }
 }
 
-/* Mobile : afficher uniquement le "après" */
+/* Mobile : focus sur le résultat */
 @media (max-width: 768px) {
   .img-before { display: none; }
   .img-after { width: 100%; left: 0; }
@@ -198,7 +206,7 @@ const beforeAfterPairs = [
 }
 
 /* ========================= */
-/*         CONTACT           */
+/*          CONTACT          */
 /* ========================= */
 
 #contact {
@@ -220,37 +228,37 @@ const beforeAfterPairs = [
 }
 
 /* ========================= */
-/*       RESPONSIVE          */
+/*        RESPONSIVE         */
 /* ========================= */
 
-@media (max-width: 768px) {
-  .hero-slider {
-    height: 360px !important;
-    min-height: 360px !important;
+@media (min-width: 768px) {
+  #hero {
+    height: 95vh;
   }
 
   .hero-overlay {
-    padding: 25px 20px;
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.95) 45%,
-      rgba(255, 255, 255, 0.85) 65%,
-      transparent 100%
-    );
+    align-items: center;
+    padding: 80px;
   }
 
-  .hero-title { font-size: 32px; }
-  .hero-subtitle { font-size: 15px; }
+  .hero-title {
+    font-size: 44px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
 
   .hero-btns {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .hero-btns a {
-    width: 100%;
-    text-align: center;
+    width: auto;
   }
+}
 
+@media (max-width: 768px) {
   .why-grid {
     grid-template-columns: 1fr;
   }
@@ -261,10 +269,6 @@ const beforeAfterPairs = [
 }
 
 @media (max-width: 480px) {
-  .hero-slider {
-    height: 320px !important;
-  }
-
   .hero-title {
     font-size: 26px;
   }
@@ -277,6 +281,7 @@ const beforeAfterPairs = [
 
 <section id="hero">
   <div class="hero-slider">
+
     <div class="hero-overlay">
       <div class="hero-content">
         <h1 class="hero-title">
@@ -284,7 +289,7 @@ const beforeAfterPairs = [
         </h1>
 
         <p class="hero-subtitle">
-          Révélez votre sourire le plus lumineux avec un soin rapide, sûr et efficace dès la première séance.
+          Révélez votre sourire le plus lumineux avec un soin sûr, rapide et efficace dès la première séance.
         </p>
 
         <div class="hero-btns">
@@ -310,20 +315,18 @@ const beforeAfterPairs = [
   <div class="section-inner">
     <h2 class="section-title">L'excellence au service de votre sourire</h2>
     <p class="section-sub">
-      Une approche professionnelle, douce et efficace pour un éclaircissement optimal et durable.
+      Une approche professionnelle, douce et efficace pour un résultat visible et durable.
     </p>
 
     <div class="why-grid">
       <div class="why-card">
         <h3>Sûreté & douceur</h3>
-        Produits premium spécialement conçus pour les dents sensibles.
+        Produits premium conçus pour les dents sensibles.
       </div>
-
       <div class="why-card">
         <h3>Expertise professionnelle</h3>
         Protocoles maîtrisés et résultats homogènes.
       </div>
-
       <div class="why-card">
         <h3>Résultats immédiats</h3>
         Jusqu’à 8 teintes de gain dès la première séance.
@@ -333,7 +336,7 @@ const beforeAfterPairs = [
 </section>
 
 <!-- =========================== -->
-<!--         AVANT APRÈS         -->
+<!--        AVANT / APRÈS        -->
 <!-- =========================== -->
 
 <section id="avant-apres">
@@ -348,7 +351,6 @@ const beforeAfterPairs = [
             <img src={pair.before} class="img-before" alt="Avant" />
             <img src={pair.after} class="img-after" alt="Après" />
           </div>
-
           <div class="ba-card-info">
             <h3>Résultat garanti</h3>
             <p>{pair.desc}</p>
@@ -371,10 +373,18 @@ const beforeAfterPairs = [
     </p>
 
     <div class="contact-actions">
-      <a href="https://calendly.com/shineclinic/seance-de-blanchiment-dentaire" target="_blank" class="btn-primary">
+      <a
+        href="https://calendly.com/shineclinic/seance-de-blanchiment-dentaire"
+        target="_blank"
+        class="btn-primary"
+      >
         Réserver en ligne
       </a>
-      <a href="https://www.instagram.com/shine_clinic_instagram/" target="_blank" class="btn-ghost">
+      <a
+        href="https://www.instagram.com/shine_clinic_instagram/"
+        target="_blank"
+        class="btn-ghost"
+      >
         Nous écrire sur Instagram
       </a>
     </div>
@@ -393,6 +403,7 @@ const beforeAfterPairs = [
 </script>
 
 </Layout>
+
 
 
 
