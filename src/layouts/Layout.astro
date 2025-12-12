@@ -1,287 +1,320 @@
 ---
+// src/layouts/Layout.astro
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
 const {
-  title = "Shine Clinic",
-  description = "Esthétique dentaire premium",
+  title,
+  description = "Blanchiment dentaire professionnel pour un sourire éclatant. Prise de rendez-vous en ligne."
 } = Astro.props;
-
-const logo = "/logo.png";
-
-const navLinks = [
-  { href: "/", label: "Accueil" },
-  { href: "/tarifs", label: "Tarifs" },
-  { href: "/#avant-apres", label: "Résultats" },
-  { href: "/#contact", label: "Rendez-vous" },
-];
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="icon" href="/favicon.svg" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://api.fontshare.com/v2/css?f[]=neue-montreal@400,500,600,700&display=swap"
-    />
+  <link rel="icon" href="/favicon.svg" />
 
-    <slot name="head" />
-  </head>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
 
-  <body>
-    <style is:global>
-      /* ================== BASE ================== */
+<body>
 
-      :root {
-        --color-bg: #ffffff;
-        --color-primary: #3c73ff;
-        --color-secondary-bg: #eef4ff;
-        --color-text-title: #0d0d0f;
-        --color-text-body: #333;
-        --color-text-light: #7e8899;
+<style is:global>
+/* ================= VARIABLES ================= */
 
-        --max-width: 1200px;
-        --section-padding-x: 1.5rem;
-        --section-padding-y: 6rem;
-      }
+:root {
+  --color-bg: #ffffff;
+  --color-primary: #3c73ff;
+  --color-primary-dark: #2f61d4;
+  --color-secondary-bg: #eef4ff;
+  --color-text-title: #0d0d0f;
+  --color-text-body: #333;
+  --color-text-light: #7e8899;
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+  --max-width: 1200px;
+  --section-padding-x: 1.5rem;
+  --section-padding-y: 6rem;
+}
 
-      body {
-        font-family: "Neue Montreal", sans-serif;
-        background: var(--color-bg);
-        color: var(--color-text-body);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+/* ================= RESET ================= */
 
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-      main {
-        flex: 1;
-      }
+html {
+  scroll-behavior: smooth;
+}
 
-      .section-inner {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 0 var(--section-padding-x);
-      }
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text-body);
+  line-height: 1.6;
+}
 
-      /* ================== HEADER ================== */
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 9999;
-        background: white;
-        border-bottom: 1px solid var(--color-secondary-bg);
-      }
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--section-padding-x);
+}
 
-      .topbar {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 16px var(--section-padding-x);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
+/* ================= BUTTONS ================= */
 
-      .logo-wrap img {
-        height: 56px;
-      }
+.btn-primary {
+  padding: 12px 26px;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
 
-      /* Desktop nav */
-      nav.main-nav {
-        display: flex;
-        gap: 24px;
-        font-weight: 500;
-      }
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
 
-      nav.main-nav a {
-        position: relative;
-      }
+.btn-ghost {
+  padding: 12px 26px;
+  border-radius: 8px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+}
 
-      nav.main-nav a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -6px;
-        width: 0;
-        height: 3px;
-        background: var(--color-primary);
-        transition: 0.2s;
-      }
+/* ================= HEADER ================= */
 
-      nav.main-nav a:hover::after {
-        width: 100%;
-      }
+header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 18px 0; /* header plus tendu */
+}
 
-      /* ================== HAMBURGER ================== */
+.nav-container {
+  display: flex;
+  align-items: flex-start; /* clé : on aligne tout par le haut */
+  justify-content: space-between;
+}
 
-      .menu-toggle {
-        display: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 10000;
-      }
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: flex-start;
+}
 
-      .menu-toggle .bar {
-        display: block;
-        width: 26px;
-        height: 3px;
-        background: #000;
-        margin: 5px 0;
-        border-radius: 2px;
-      }
+.logo img {
+  height: 72px;
+  width: auto;
+  transform: translateY(-6px); /* remonte légèrement le logo */
+}
 
-      /* ================== MOBILE MENU ================== */
+/* ================= DESKTOP NAV ================= */
 
-      .mobile-nav {
-        position: fixed;
-        inset: 0;
-        background: white;
-        z-index: 9000;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 24px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-      }
+.main-nav {
+  margin-top: 10px; /* aligne visuellement avec le logo */
+}
 
-      body.menu-open .mobile-nav {
-        transform: translateX(0);
-      }
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 36px;
+}
 
-      .mobile-nav a {
-        font-size: 22px;
-        font-weight: 600;
-      }
+.main-nav a {
+  color: var(--color-primary);
+  font-weight: 600;
+  position: relative;
+  transition: color 0.25s ease;
+}
 
-      /* ================== BUTTONS ================== */
+/* underline animation */
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.25s ease;
+}
 
-      .btn-primary,
-      .btn-ghost {
-        display: inline-block;
-        padding: 0.75rem 2rem;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: 0.3s;
-      }
+.main-nav a:hover {
+  color: white;
+}
 
-      .btn-primary {
-        background: var(--color-primary);
-        color: white;
-      }
+.main-nav a:hover::after {
+  width: 100%;
+}
 
-      .btn-primary:hover {
-        background: #2f61d4;
-      }
+/* ================= HAMBURGER ================= */
 
-      .btn-ghost {
-        border: 2px solid var(--color-primary);
-        color: var(--color-primary);
-      }
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px; /* alignement visuel avec le menu */
+}
 
-      .btn-ghost:hover {
-        background: var(--color-secondary-bg);
-      }
+.menu-toggle span {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background: var(--color-primary);
+  margin: 6px 0;
+  border-radius: 2px;
+}
 
-      /* ================== FOOTER ================== */
+/* ================= MOBILE MENU ================= */
 
-      footer {
-        background: #0d0d0f;
-        color: white;
-        padding: 50px 20px;
-        text-align: center;
-      }
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
 
-      footer img {
-        height: 40px;
-        filter: brightness(0) invert(1);
-        margin-bottom: 12px;
-      }
+.mobile-menu.active {
+  transform: translateX(0);
+}
 
-      /* ================== RESPONSIVE ================== */
+.mobile-menu a {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-text-title);
+}
 
-      @media (max-width: 900px) {
-        nav.main-nav {
-          display: none;
-        }
+.mobile-menu .btn-primary {
+  margin-top: 14px;
+}
 
-        .menu-toggle {
-          display: block;
-        }
-      }
-    </style>
+/* ================= FOOTER ================= */
 
-    <!-- HEADER -->
-    <header>
-      <div class="topbar">
-        <a href="/" class="logo-wrap">
-          <img src={logo} alt="Shine Clinic" />
-        </a>
+footer {
+  background: var(--color-text-title);
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
 
-        <nav class="main-nav">
-          {navLinks.map((link) => (
-            <a href={link.href}>{link.label}</a>
-          ))}
-        </nav>
+footer p {
+  font-size: 14px;
+  opacity: 0.8;
+}
 
-        <button class="menu-toggle" aria-label="Ouvrir le menu">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-      </div>
-    </header>
+/* ================= RESPONSIVE ================= */
 
-    <!-- MOBILE NAV -->
-    <nav class="mobile-nav">
-      {navLinks.map((link) => (
-        <a href={link.href}>{link.label}</a>
-      ))}
+@media (max-width: 900px) {
+  .main-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .logo img {
+    height: 56px;
+    transform: translateY(-4px);
+  }
+
+  :root {
+    --section-padding-x: 1rem;
+    --section-padding-y: 4rem;
+  }
+}
+</style>
+
+<!-- HEADER -->
+<header>
+  <div class="section-inner nav-container">
+    <a href="/" class="logo">
+      <img src="/logo.png" alt="Shine Clinic Logo" />
+    </a>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/tarifs">Tarifs</a></li>
+        <li><a href="/#avant-apres">Résultats</a></li>
+        <li><a href="/#contact">Rendez-vous</a></li>
+      </ul>
     </nav>
 
-    <main>
-      <slot />
-    </main>
+    <button class="menu-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
 
-    <footer>
-      <img src={logo} alt="Shine Clinic" />
-      <p>© {new Date().getFullYear()} Shine Clinic — Tous droits réservés</p>
-    </footer>
+<!-- MOBILE MENU -->
+<nav class="mobile-menu">
+  <a href="/">Accueil</a>
+  <a href="/tarifs">Tarifs</a>
+  <a href="/#avant-apres">Résultats</a>
+  <a href="/#contact" class="btn-primary">Prendre rendez-vous</a>
+</nav>
 
-    <script is:inline>
-      const toggle = document.querySelector(".menu-toggle");
-      const body = document.body;
-      const links = document.querySelectorAll(".mobile-nav a");
+<main>
+  <slot />
+</main>
 
-      toggle.addEventListener("click", () => {
-        body.classList.toggle("menu-open");
-      });
+<footer>
+  <p>© {new Date().getFullYear()} Shine Clinic — Tous droits réservés</p>
+</footer>
 
-      links.forEach((link) =>
-        link.addEventListener("click", () => {
-          body.classList.remove("menu-open");
-        })
-      );
-    </script>
-  </body>
+<script is:inline>
+const toggle = document.querySelector(".menu-toggle");
+const menu = document.querySelector(".mobile-menu");
+const links = menu.querySelectorAll("a");
+
+toggle.addEventListener("click", () => {
+  menu.classList.toggle("active");
+});
+
+links.forEach(link => {
+  link.addEventListener("click", () => {
+    menu.classList.remove("active");
+  });
+});
+</script>
+
+</body>
 </html>

@@ -10,7 +10,10 @@ const beforeAfterPairs = [
 ];
 ---
 
-<Layout title="Shine Clinic – Accueil">
+<Layout
+  title="Shine Clinic – Accueil"
+  description="Blanchiment dentaire professionnel pour un sourire éclatant et durable."
+>
 
 <style>
 /* ================= TITRES ================= */
@@ -19,14 +22,14 @@ const beforeAfterPairs = [
   font-size: 38px;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .section-sub {
   text-align: center;
   font-size: 17px;
   max-width: 760px;
-  margin: 0 auto 45px;
+  margin: 0 auto 48px;
   opacity: 0.85;
 }
 
@@ -34,7 +37,7 @@ const beforeAfterPairs = [
 
 #hero {
   position: relative;
-  height: 85vh;
+  height: 88vh;
   min-height: 520px;
   overflow: hidden;
 }
@@ -66,38 +69,38 @@ const beforeAfterPairs = [
   inset: 0;
   display: flex;
   align-items: flex-end;
-  padding: 32px 20px 48px;
+  padding: 36px var(--section-padding-x) 56px;
   background: linear-gradient(
     to top,
-    rgba(0,0,0,0.65) 20%,
-    rgba(0,0,0,0.35) 45%,
-    rgba(0,0,0,0.1) 70%,
-    transparent 100%
+    rgba(0,0,0,0.8) 25%,
+    rgba(0,0,0,0.55) 50%,
+    rgba(0,0,0,0.15) 75%,
+    transparent
   );
-  z-index: 10;
+  z-index: 5;
 }
 
 .hero-content {
-  max-width: 600px;
+  max-width: 640px;
 }
 
 .hero-title {
   color: white;
-  font-size: 32px;
+  font-size: 34px;
   line-height: 1.1;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .hero-subtitle {
   color: rgba(255,255,255,0.9);
-  font-size: 15px;
-  margin-bottom: 18px;
+  font-size: 16px;
+  margin-bottom: 24px;
 }
 
 .hero-btns {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .hero-btns a {
@@ -108,16 +111,22 @@ const beforeAfterPairs = [
 /* Desktop hero */
 @media (min-width: 768px) {
   #hero {
-    height: 90vh;
+    height: 92vh;
   }
 
   .hero-overlay {
     align-items: center;
-    padding: 80px;
+    padding: 90px;
+    background: linear-gradient(
+      to right,
+      rgba(0,0,0,0.65) 30%,
+      rgba(0,0,0,0.25) 50%,
+      transparent 65%
+    );
   }
 
   .hero-title {
-    font-size: 44px;
+    font-size: 52px;
   }
 
   .hero-subtitle {
@@ -136,23 +145,25 @@ const beforeAfterPairs = [
 /* ================= POURQUOI ================= */
 
 #pourquoi {
-  padding: var(--section-padding-y) var(--section-padding-x);
+  padding: var(--section-padding-y) 0;
 }
 
 .why-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 26px;
+  gap: 28px;
 }
 
 .why-card {
   background: white;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  font-weight: 600;
+  font-size: 17px;
+  text-align: center;
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   .why-grid {
     grid-template-columns: 1fr;
@@ -163,31 +174,27 @@ const beforeAfterPairs = [
 
 #avant-apres {
   background: var(--color-secondary-bg);
-  padding: var(--section-padding-y) var(--section-padding-x);
+  padding: var(--section-padding-y) 0;
 }
 
 .ba-gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  gap: 26px;
 }
 
-/* Card */
 .ba-gallery-card {
   background: white;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-/* Image container */
 .ba-image-container {
   position: relative;
-  height: 260px;
-  overflow: hidden;
+  height: 300px;
 }
 
-/* Images */
 .ba-image-container img {
   position: absolute;
   inset: 0;
@@ -202,22 +209,21 @@ const beforeAfterPairs = [
   opacity: 1;
 }
 
-/* Bouton mobile */
 .ba-toggle {
   position: absolute;
-  bottom: 12px;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.75);
+  background: rgba(0,0,0,0.7);
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 9px 18px;
   font-size: 14px;
-  border-radius: 20px;
+  border-radius: 22px;
   cursor: pointer;
 }
 
-/* Desktop hover */
+/* Desktop interaction */
 @media (min-width: 769px) {
   .ba-toggle {
     display: none;
@@ -226,53 +232,68 @@ const beforeAfterPairs = [
   .ba-image-container img {
     opacity: 1;
     width: 50%;
+    transition: width 0.5s ease;
   }
 
   .img-before { left: 0; }
   .img-after { right: 0; }
 
   .ba-gallery-card:hover .img-before {
-    transform: translateX(-100%);
-    transition: 0.5s;
+    width: 0;
   }
 
   .ba-gallery-card:hover .img-after {
     width: 100%;
-    transition: 0.5s;
   }
 }
 
 .ba-card-info {
   text-align: center;
-  padding: 14px;
+  padding: 18px;
 }
 
 .ba-card-info h3 {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
+}
+
+.ba-card-info p {
+  color: var(--color-primary);
+  font-size: 14px;
 }
 
 /* ================= CONTACT ================= */
 
 #contact {
-  padding: var(--section-padding-y) var(--section-padding-x);
+  padding: var(--section-padding-y) 0;
   text-align: center;
 }
 
 .contact-text {
   max-width: 600px;
-  margin: 0 auto 25px;
+  margin: 0 auto 30px;
+  font-size: 18px;
 }
 
 .contact-actions {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
 }
+
+@media (max-width: 768px) {
+  .contact-actions {
+    flex-direction: column;
+  }
+
+  .contact-actions a {
+    width: 100%;
+    max-width: 320px;
+  }
+}
 </style>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-slider">
     <div class="hero-overlay">
@@ -284,8 +305,8 @@ const beforeAfterPairs = [
           Révélez votre sourire le plus lumineux dès la première séance.
         </p>
         <div class="hero-btns">
-          <a href="#contact" class="btn-primary">Prendre rendez-vous</a>
-          <a href="#avant-apres" class="btn-ghost">Voir nos résultats</a>
+          <a href="#contact" class="btn-primary btn-base">Prendre rendez-vous</a>
+          <a href="#avant-apres" class="btn-ghost btn-base">Voir nos résultats</a>
         </div>
       </div>
     </div>
@@ -298,12 +319,11 @@ const beforeAfterPairs = [
   </div>
 </section>
 
-<!-- POURQUOI -->
 <section id="pourquoi">
   <div class="section-inner">
     <h2 class="section-title">L'excellence au service de votre sourire</h2>
     <p class="section-sub">
-      Des soins professionnels, sûrs et efficaces.
+      Des soins professionnels, sûrs et efficaces pour des résultats durables.
     </p>
 
     <div class="why-grid">
@@ -314,18 +334,19 @@ const beforeAfterPairs = [
   </div>
 </section>
 
-<!-- AVANT / APRÈS -->
 <section id="avant-apres">
   <div class="section-inner">
     <h2 class="section-title">Nos transformations</h2>
-    <p class="section-sub">Comparez avant et après nos soins.</p>
+    <p class="section-sub">
+      Comparez avant et après nos soins.
+    </p>
 
     <div class="ba-gallery-grid">
       {beforeAfterPairs.map(pair => (
         <div class="ba-gallery-card">
           <div class="ba-image-container">
-            <img src={pair.after} class="img-after active" alt="Après" />
-            <img src={pair.before} class="img-before" alt="Avant" />
+            <img src={pair.after} class="img-after active" alt="Après blanchiment" />
+            <img src={pair.before} class="img-before" alt="Avant blanchiment" />
             <button class="ba-toggle">Voir l’avant</button>
           </div>
           <div class="ba-card-info">
@@ -338,17 +359,27 @@ const beforeAfterPairs = [
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
     <h2 class="section-title">Réservez votre moment Shine</h2>
-    <p class="contact-text">Réservation en ligne ou message direct.</p>
+    <p class="contact-text">
+      Prêt(e) à illuminer votre sourire ? Réservez votre séance en ligne.
+    </p>
 
     <div class="contact-actions">
-      <a href="https://calendly.com/shineclinic/seance-de-blanchiment-dentaire" target="_blank" class="btn-primary">
+      <a
+        href="https://calendly.com/shineclinic/seance-de-blanchiment-dentaire"
+        target="_blank"
+        class="btn-primary btn-base"
+      >
         Réserver en ligne
       </a>
-      <a href="https://www.instagram.com/shine_clinic_instagram/" target="_blank" class="btn-ghost">
+      <a
+        href="https://www.instagram.com/shine_clinic_instagram/"
+        target="_blank"
+        class="btn-ghost btn-base"
+        style="color: var(--color-primary); border-color: var(--color-primary);"
+      >
         Instagram
       </a>
     </div>
@@ -359,13 +390,16 @@ const beforeAfterPairs = [
 /* Hero slider */
 const slides = document.querySelectorAll(".hero-slide");
 let idx = 0;
-setInterval(() => {
-  slides[idx].classList.remove("active");
-  idx = (idx + 1) % slides.length;
-  slides[idx].classList.add("active");
-}, 6000);
+if (slides.length > 0) {
+  slides[0].classList.add("active");
+  setInterval(() => {
+    slides[idx].classList.remove("active");
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add("active");
+  }, 6000);
+}
 
-/* Avant / Après mobile toggle */
+/* Avant / Après toggle mobile */
 document.querySelectorAll(".ba-gallery-card").forEach(card => {
   const btn = card.querySelector(".ba-toggle");
   const before = card.querySelector(".img-before");
